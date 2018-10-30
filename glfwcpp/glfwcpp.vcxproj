@@ -25,7 +25,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\glfwppapplication.cpp" />
+    <ClCompile Include="src\application.cpp" />
     <ClCompile Include="src\glfwppexception.cpp" />
     <ClCompile Include="src\glfwppglbuffer.cpp" />
     <ClCompile Include="src\glfwppglslprogram.cpp" />
@@ -53,7 +53,7 @@
     <ClInclude Include="include\common_stl_hdrs.hpp" />
     <ClInclude Include="include\macros.hpp" />
     <ClInclude Include="interface\glfwpp.hpp" />
-    <ClInclude Include="interface\glfwppapplication.hpp" />
+    <ClInclude Include="interface\application.hpp" />
     <ClInclude Include="interface\glfwppexception.hpp" />
     <ClInclude Include="interface\glfwppglbuffer.hpp" />
     <ClInclude Include="interface\glfwppglslprogram.hpp" />

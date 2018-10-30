@@ -5,7 +5,7 @@
 
 #include "precompiled-header.hpp"
 
-#include "../interface/glfwppapplication.hpp"
+#include "../interface/application.hpp"
 
 #include "../interface/glfwppexception.hpp"
 

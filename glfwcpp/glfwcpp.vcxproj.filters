@@ -33,9 +33,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\glfwppapplication.cpp">
-      <Filter>Source Files\src</Filter>
-    </ClCompile>
     <ClCompile Include="src\glfwppexception.cpp">
       <Filter>Source Files\src</Filter>
     </ClCompile>
@@ -75,6 +72,9 @@
     <ClCompile Include="src\glfwpptexture.cpp">
       <Filter>Source Files\src</Filter>
     </ClCompile>
+    <ClCompile Include="src\application.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\common_stl_hdrs.hpp">
@@ -84,9 +84,6 @@
       <Filter>Header Files\include</Filter>
     </ClInclude>
     <ClInclude Include="interface\glfwpp.hpp">
-      <Filter>Header Files\interface</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\glfwppapplication.hpp">
       <Filter>Header Files\interface</Filter>
     </ClInclude>
     <ClInclude Include="interface\glfwppexception.hpp">
@@ -141,6 +138,9 @@
       <Filter>Header Files\src</Filter>
     </ClInclude>
     <ClInclude Include="interface\glfwpptexture.hpp">
+      <Filter>Header Files\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\application.hpp">
       <Filter>Header Files\interface</Filter>
     </ClInclude>
   </ItemGroup>

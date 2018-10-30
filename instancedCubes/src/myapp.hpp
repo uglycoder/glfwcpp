@@ -8,7 +8,7 @@
 
 #include <globalutils.hpp>
 
-#include <glfwppapplication.hpp>
+#include <application.hpp>
 #include <glfwppwindow.hpp>
 #include <glfwppglslprogram.hpp>
 #include <glfwppvertexarrayobject.hpp>
