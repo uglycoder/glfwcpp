@@ -33,33 +33,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\glfwppexception.cpp">
-      <Filter>Source Files\src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\glfwppglbuffer.cpp">
-      <Filter>Source Files\src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\glfwppglslprogram.cpp">
-      <Filter>Source Files\src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\glfwpphints.cpp">
-      <Filter>Source Files\src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\glfwpputils.cpp">
-      <Filter>Source Files\src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\glfwppvertexarrayobject.cpp">
-      <Filter>Source Files\src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\glfwppvertexbuffer.cpp">
-      <Filter>Source Files\src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\glfwppvertexindexbuffer.cpp">
-      <Filter>Source Files\src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\glfwppwindow.cpp">
-      <Filter>Source Files\src</Filter>
-    </ClCompile>
     <ClCompile Include="src\glmcamera.cpp">
       <Filter>Source Files\src</Filter>
     </ClCompile>
@@ -69,10 +42,37 @@
     <ClCompile Include="glad\glad.c">
       <Filter>Source Files\glad</Filter>
     </ClCompile>
-    <ClCompile Include="src\glfwpptexture.cpp">
+    <ClCompile Include="src\application.cpp">
       <Filter>Source Files\src</Filter>
     </ClCompile>
-    <ClCompile Include="src\application.cpp">
+    <ClCompile Include="src\exception.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\glbuffer.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\glslprogram.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hints.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\texture.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\vertexarrayobject.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\vertexbuffer.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\vertexindexbuffer.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\window.cpp">
       <Filter>Source Files\src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -84,33 +84,6 @@
       <Filter>Header Files\include</Filter>
     </ClInclude>
     <ClInclude Include="interface\glfwpp.hpp">
-      <Filter>Header Files\interface</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\glfwppexception.hpp">
-      <Filter>Header Files\interface</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\glfwppglbuffer.hpp">
-      <Filter>Header Files\interface</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\glfwppglslprogram.hpp">
-      <Filter>Header Files\interface</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\glfwpphints.hpp">
-      <Filter>Header Files\interface</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\glfwpputils.hpp">
-      <Filter>Header Files\interface</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\glfwppvertexarrayobject.hpp">
-      <Filter>Header Files\interface</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\glfwppvertexbuffer.hpp">
-      <Filter>Header Files\interface</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\glfwppvertexindexbuffer.hpp">
-      <Filter>Header Files\interface</Filter>
-    </ClInclude>
-    <ClInclude Include="interface\glfwppwindow.hpp">
       <Filter>Header Files\interface</Filter>
     </ClInclude>
     <ClInclude Include="interface\glheader.h">
@@ -137,10 +110,37 @@
     <ClInclude Include="src\precompiled-header.hpp">
       <Filter>Header Files\src</Filter>
     </ClInclude>
-    <ClInclude Include="interface\glfwpptexture.hpp">
+    <ClInclude Include="interface\application.hpp">
       <Filter>Header Files\interface</Filter>
     </ClInclude>
-    <ClInclude Include="interface\application.hpp">
+    <ClInclude Include="interface\exception.hpp">
+      <Filter>Header Files\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\glbuffer.hpp">
+      <Filter>Header Files\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\glslprogram.hpp">
+      <Filter>Header Files\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\hints.hpp">
+      <Filter>Header Files\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\texture.hpp">
+      <Filter>Header Files\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\utils.hpp">
+      <Filter>Header Files\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\vertexarrayobject.hpp">
+      <Filter>Header Files\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\vertexbuffer.hpp">
+      <Filter>Header Files\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\vertexindexbuffer.hpp">
+      <Filter>Header Files\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\window.hpp">
       <Filter>Header Files\interface</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,4 +1,4 @@
-// glfwppapplication.cpp
+//  application.cpp
 //  MIT License
 //  See LICENSE.txt file in root of project
 //  Copyright(c) 2018 Simon Parmenter
@@ -7,7 +7,7 @@
 
 #include "../interface/application.hpp"
 
-#include "../interface/glfwppexception.hpp"
+#include "../interface/exception.hpp"
 
 #include "../include/macros.hpp"
 

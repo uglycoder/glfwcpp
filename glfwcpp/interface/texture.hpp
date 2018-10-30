@@ -1,4 +1,4 @@
-//  glfwpptexture.cpp
+//  texture.cpp
 //  MIT License
 //  See LICENSE.txt file in root of project
 //  Copyright(c) 2018 Simon Parmenter
@@ -7,11 +7,11 @@
 
 namespace GLFWPP_ns
 {
-  class texture
+  class Texture
   {
   public:
-    texture();
-    ~texture();
+    Texture();
+    ~Texture();
   };
 
 }

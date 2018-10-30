@@ -1,13 +1,13 @@
-// glfwppvertexarrayobject.cpp
+//  vertexarrayobject.cpp
 //  MIT License
 //  See LICENSE.txt file in root of project
 //  Copyright(c) 2018 Simon Parmenter
 
 #include "precompiled-header.hpp"
 
-#include "../interface/glfwppvertexarrayobject.hpp"
+#include "../interface/vertexarrayobject.hpp"
 
-#include "../interface/glfwppvertexbuffer.hpp"
+#include "../interface/vertexbuffer.hpp"
 
 #include <cassert>
 #include <iostream>

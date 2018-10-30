@@ -26,16 +26,16 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\application.cpp" />
-    <ClCompile Include="src\glfwppexception.cpp" />
-    <ClCompile Include="src\glfwppglbuffer.cpp" />
-    <ClCompile Include="src\glfwppglslprogram.cpp" />
-    <ClCompile Include="src\glfwpphints.cpp" />
-    <ClCompile Include="src\glfwpptexture.cpp" />
-    <ClCompile Include="src\glfwpputils.cpp" />
-    <ClCompile Include="src\glfwppvertexarrayobject.cpp" />
-    <ClCompile Include="src\glfwppvertexbuffer.cpp" />
-    <ClCompile Include="src\glfwppvertexindexbuffer.cpp" />
-    <ClCompile Include="src\glfwppwindow.cpp" />
+    <ClCompile Include="src\exception.cpp" />
+    <ClCompile Include="src\glbuffer.cpp" />
+    <ClCompile Include="src\glslprogram.cpp" />
+    <ClCompile Include="src\hints.cpp" />
+    <ClCompile Include="src\texture.cpp" />
+    <ClCompile Include="src\utils.cpp" />
+    <ClCompile Include="src\vertexarrayobject.cpp" />
+    <ClCompile Include="src\vertexbuffer.cpp" />
+    <ClCompile Include="src\vertexindexbuffer.cpp" />
+    <ClCompile Include="src\window.cpp" />
     <ClCompile Include="src\glmcamera.cpp" />
     <ClCompile Include="src\precompiled-header.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -54,16 +54,16 @@
     <ClInclude Include="include\macros.hpp" />
     <ClInclude Include="interface\glfwpp.hpp" />
     <ClInclude Include="interface\application.hpp" />
-    <ClInclude Include="interface\glfwppexception.hpp" />
-    <ClInclude Include="interface\glfwppglbuffer.hpp" />
-    <ClInclude Include="interface\glfwppglslprogram.hpp" />
-    <ClInclude Include="interface\glfwpphints.hpp" />
-    <ClInclude Include="interface\glfwpptexture.hpp" />
-    <ClInclude Include="interface\glfwpputils.hpp" />
-    <ClInclude Include="interface\glfwppvertexarrayobject.hpp" />
-    <ClInclude Include="interface\glfwppvertexbuffer.hpp" />
-    <ClInclude Include="interface\glfwppvertexindexbuffer.hpp" />
-    <ClInclude Include="interface\glfwppwindow.hpp" />
+    <ClInclude Include="interface\exception.hpp" />
+    <ClInclude Include="interface\glbuffer.hpp" />
+    <ClInclude Include="interface\glslprogram.hpp" />
+    <ClInclude Include="interface\hints.hpp" />
+    <ClInclude Include="interface\texture.hpp" />
+    <ClInclude Include="interface\utils.hpp" />
+    <ClInclude Include="interface\vertexarrayobject.hpp" />
+    <ClInclude Include="interface\vertexbuffer.hpp" />
+    <ClInclude Include="interface\vertexindexbuffer.hpp" />
+    <ClInclude Include="interface\window.hpp" />
     <ClInclude Include="interface\glheader.h" />
     <ClInclude Include="interface\glmcamera.hpp" />
     <ClInclude Include="interface\globalutils.hpp" />

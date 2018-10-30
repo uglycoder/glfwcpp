@@ -1,13 +1,13 @@
-// glfwppwindow.cpp
+//  window.cpp
 //  MIT License
 //  See LICENSE.txt file in root of project
 //  Copyright(c) 2018 Simon Parmenter
 
 #include "precompiled-header.hpp"
 
-#include "../interface/glfwppwindow.hpp"
+#include "../interface/window.hpp"
 
-#include "../interface/glfwppexception.hpp"
+#include "../interface/exception.hpp"
 #include "../interface/glheader.h"
 
 #include "../include/macros.hpp"

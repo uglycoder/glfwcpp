@@ -1,14 +1,14 @@
-// glfwppglslprogram.cpp
+//  glslprogram.cpp
 //  MIT License
 //  See LICENSE.txt file in root of project
 //  Copyright(c) 2018 Simon Parmenter
 
 #include "precompiled-header.hpp"
 
-#include "../interface/glfwppglslprogram.hpp"
+#include "../interface/glslprogram.hpp"
 
-#include "../interface/glfwpputils.hpp"
-#include "../interface/glfwppexception.hpp"
+#include "../interface/utils.hpp"
+#include "../interface/exception.hpp"
 
 #include "../include/macros.hpp"
 #include "../interface/globalutils.hpp"

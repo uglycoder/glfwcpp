@@ -9,11 +9,11 @@
 #include <globalutils.hpp>
 
 #include <application.hpp>
-#include <glfwppwindow.hpp>
-#include <glfwppglslprogram.hpp>
-#include <glfwppvertexarrayobject.hpp>
-#include <glfwppvertexbuffer.hpp>
-#include <glfwppvertexindexbuffer.hpp>
+#include <window.hpp>
+#include <glslprogram.hpp>
+#include <vertexarrayobject.hpp>
+#include <vertexbuffer.hpp>
+#include <vertexindexbuffer.hpp>
 
 #include <GLFW/glfw3.h>
 

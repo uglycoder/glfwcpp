@@ -1,13 +1,13 @@
-// glfwppglbuffer.cpp
+//  glbuffer.cpp
 //  MIT License
 //  See LICENSE.txt file in root of project
 //  Copyright(c) 2018 Simon Parmenter
 
 #include "precompiled-header.hpp"
 
-#include "../interface/glfwppglbuffer.hpp"
+#include "../interface/glbuffer.hpp"
 
-#include "../interface/glfwpputils.hpp"
+#include "../interface/utils.hpp"
 
 //std::cout << __func__ << std::endl;
 
