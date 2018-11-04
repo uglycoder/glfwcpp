@@ -55,7 +55,7 @@ void GLFWPP_ns::VAO::BreakBinding() noexcept
 
 GLFWPP_ns::VAO::VAO(std::string labelStr) : m_label{std::move(labelStr)}
 {
-  ::glGenVertexArrays(1, &m_name);
+  ::glCreateVertexArrays(1, &m_name);
   bind();
   label(m_label);
   std::cout << "constructor: " << __func__ << std::endl;

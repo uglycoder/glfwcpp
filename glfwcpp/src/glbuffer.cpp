@@ -20,7 +20,7 @@ GLFWPP_ns::GLBuffer::GLBuffer(
   m_type{type}
   ,m_label{std::move(label)}
 {
-  ::glGenBuffers(1, &m_name);
+  ::glCreateBuffers(1, &m_name);
   bind();
 
   std::cout << "constructor: " << __func__ << std::endl;
