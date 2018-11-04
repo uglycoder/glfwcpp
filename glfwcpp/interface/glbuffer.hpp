@@ -36,7 +36,7 @@ public:
   void unBind() const noexcept;
 
 protected:
-  explicit GLBuffer(::GLenum type, std::string label);
+  explicit GLBuffer(::GLenum type, std::string labelstr);
 
   ~GLBuffer();
 

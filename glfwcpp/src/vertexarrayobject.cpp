@@ -8,6 +8,7 @@
 #include "../interface/vertexarrayobject.hpp"
 
 #include "../interface/vertexbuffer.hpp"
+#include "../interface/utils.hpp"
 
 #include <cassert>
 #include <iostream>
@@ -53,11 +54,11 @@ void GLFWPP_ns::VAO::BreakBinding() noexcept
 
 ////////////////////////////////////////////////////////////////////////////////
 
-GLFWPP_ns::VAO::VAO(std::string labelStr) : m_label{std::move(labelStr)}
+GLFWPP_ns::VAO::VAO(std::string labelStr)
 {
   ::glCreateVertexArrays(1, &m_name);
   bind();
-  label(m_label);
+  label(labelStr);
   std::cout << "constructor: " << __func__ << std::endl;
 }
 
@@ -83,9 +84,7 @@ void GLFWPP_ns::VAO::label(std::string labelStr) noexcept
   assert(::glIsVertexArray(m_name));
 
   m_label = std::move(labelStr);
-  ::GLsizei const size{(m_label.length() ? -1 : 0)};
-  char const * const strPtr{size ? m_label.c_str() : nullptr};
-  ::glObjectLabel(GL_BUFFER, m_name, size, strPtr);
+  LabelObject(OGL_LABEL_NAMESPACE::VERTEX_ARRAY, m_name, m_label);
 }
 
 void GLFWPP_ns::VAO::bind() const noexcept

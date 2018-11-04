@@ -15,13 +15,13 @@
 
 GLFWPP_ns::GLBuffer::GLBuffer(
   ::GLenum type
-  ,std::string label)
+  ,std::string labelstr)
   :
   m_type{type}
-  ,m_label{std::move(label)}
 {
   ::glCreateBuffers(1, &m_name);
   bind();
+  label(labelstr);
 
   std::cout << "constructor: " << __func__ << std::endl;
 }
