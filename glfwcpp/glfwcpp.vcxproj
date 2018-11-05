@@ -181,6 +181,7 @@
       <PrecompiledHeaderFile>precompiled-header.hpp</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>$(GLFW_INCLUDE_DIR);$(GLM_ROOT_DIR);$(GLAD_INCLUDE_DIR);$(GLAD_SOURCE_DIR)</AdditionalIncludeDirectories>
       <EnablePREfast>true</EnablePREfast>
+      <AdditionalOptions>/Zm200 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -200,6 +201,7 @@
       <PrecompiledHeaderFile>precompiled-header.hpp</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>$(GLFW_INCLUDE_DIR);$(GLM_ROOT_DIR);$(GLAD_INCLUDE_DIR);$(GLAD_SOURCE_DIR)</AdditionalIncludeDirectories>
       <EnablePREfast>true</EnablePREfast>
+      <AdditionalOptions>/Zm200 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -220,6 +222,7 @@
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <PrecompiledHeaderFile>precompiled-header.hpp</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>$(GLFW_INCLUDE_DIR);$(GLM_ROOT_DIR);$(GLAD_INCLUDE_DIR);$(GLAD_SOURCE_DIR)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/Zm200 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -242,6 +245,7 @@
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <PrecompiledHeaderFile>precompiled-header.hpp</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>$(GLFW_INCLUDE_DIR);$(GLM_ROOT_DIR);$(GLAD_INCLUDE_DIR);$(GLAD_SOURCE_DIR)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/Zm200 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

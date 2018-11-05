@@ -14,10 +14,10 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 GLFWPP_ns::GLBuffer::GLBuffer(
-  ::GLenum type
+  ::GLenum target
   ,std::string labelstr)
   :
-  m_type{type}
+  m_target{target}
 {
   ::glCreateBuffers(1, &m_name);
   bind();
@@ -29,6 +29,8 @@ GLFWPP_ns::GLBuffer::GLBuffer(
 
 GLFWPP_ns::GLBuffer::~GLBuffer()
 {
+  assert(::glIsBuffer(m_name));
+
   ::glDeleteBuffers(1, &m_name);
 
   std::cout << __func__ << std::endl;
@@ -54,7 +56,7 @@ void GLFWPP_ns::GLBuffer::label(std::string label) noexcept
 
 void GLFWPP_ns::GLBuffer::bind() const noexcept
 {
-  ::glBindBuffer(m_type, m_name);
+  ::glBindBuffer(m_target, m_name);
 }
 
 void GLFWPP_ns::GLBuffer::allocateImmutableStorage(
@@ -74,5 +76,5 @@ void GLFWPP_ns::GLBuffer::allocateImmutableStorage(
 
 void GLFWPP_ns::GLBuffer::unBind() const noexcept
 {
-  ::glBindBuffer(m_type, 0);
+  ::glBindBuffer(m_target, 0);
 }

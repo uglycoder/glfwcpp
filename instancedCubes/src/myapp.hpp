@@ -14,6 +14,7 @@
 #include <vertexarrayobject.hpp>
 #include <vertexbuffer.hpp>
 #include <vertexindexbuffer.hpp>
+#include <texture.hpp>
 
 #include <GLFW/glfw3.h>
 
@@ -174,6 +175,9 @@ public:
 
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LEQUAL);
+
+    GLFWPP_ns::Texture<GLFWPP_ns::OGL_TEXTURE_TARGETS::ONE_D> tex("1D texture");
+    tex.allocateImmutableStorage(1, GL_RGBA32F, 256);
 
     return true;
   }

@@ -10,39 +10,37 @@
 
 
 
-GLFWPP_ns::Texture::Texture(
-  ::GLenum target
+GLFWPP_ns::TextureBase::TextureBase(
+  OGL_TEXTURE_TARGETS target
   , std::string labelstr)
-  :
-  m_target{target}
 {
-  ::glCreateTextures(target, 1, &m_name);
-  bind();
+  ::glCreateTextures(static_cast<::GLenum>(target), 1, &m_name);
   label(labelstr);
 
   std::cout << "constructor: " << __func__ << std::endl;
 }
 
 
-GLFWPP_ns::Texture::~Texture()
+GLFWPP_ns::TextureBase::~TextureBase()
 {
+  assert(::glIsTexture(m_name));
 
   ::glDeleteTextures(1, &m_name);
 }
 
-GLuint GLFWPP_ns::Texture::name() const noexcept
+GLuint GLFWPP_ns::TextureBase::name() const noexcept
 {
   return m_name;
 }
 
-std::string GLFWPP_ns::Texture::label() const noexcept
+std::string GLFWPP_ns::TextureBase::label() const noexcept
 {
   return m_label;
 }
 
-void GLFWPP_ns::Texture::label(std::string label) noexcept
+void GLFWPP_ns::TextureBase::label(std::string label) noexcept
 {
-  assert(::glIsBuffer(m_name));
+  assert(::glIsTexture(m_name));
 
   m_label = std::move(label);
   LabelObject(OGL_LABEL_NAMESPACE::TEXTURE, m_name, m_label);
