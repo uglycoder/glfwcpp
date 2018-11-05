@@ -12,7 +12,7 @@
 
 void GLFWPP_ns::LabelObject(OGL_LABEL_NAMESPACE ns, ::GLuint name, std::string const & label) noexcept
 {
-  assert(label.size() < [] {::GLint maxLength; ::glGetIntegerv(GL_MAX_LABEL_LENGTH, &maxLength); return maxLength; }());
+  assert(static_cast<::GLint>(label.size()) < [] {::GLint maxLength; ::glGetIntegerv(GL_MAX_LABEL_LENGTH, &maxLength); return maxLength; }());
 
   ::GLsizei const size{(!label.empty() ? -1 : 0)};
   char const * const strPtr{size ? label.c_str() : nullptr};
