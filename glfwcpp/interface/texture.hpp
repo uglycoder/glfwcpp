@@ -89,7 +89,7 @@ namespace GLFWPP_ns
       }
       else if constexpr(texTarget == OGL_TEXTURE_TARGETS::THREE_D && sizeof...(args) == 5)
       {
-        ::glTextureStorag3D(
+        ::glTextureStorage3D(
           name()
           , std::forward<ARGS>(args)...
         );
@@ -99,6 +99,39 @@ namespace GLFWPP_ns
         static_assert(false, "Invalid number of arguments for texture target.");
       }
     }
+
+    template<typename ... ARGS>
+    void loadData(ARGS &&... args) noexcept
+    {
+      static_assert(sizeof...(args) > 5 && sizeof...(args) < 11, "Invalid number of arguments.");
+
+      if constexpr(texTarget == OGL_TEXTURE_TARGETS::ONE_D && sizeof...(args) == 6)
+      {
+        ::glTextureSubImage1D(
+          name()
+          , std::forward<ARGS>(args)...
+        );
+      }
+      else if constexpr(texTarget == OGL_TEXTURE_TARGETS::TWO_D && sizeof...(args) == 8)
+      {
+        ::glTextureSubImage2D(
+          name()
+          , std::forward<ARGS>(args)...
+        );
+      }
+      else if constexpr(texTarget == OGL_TEXTURE_TARGETS::THREE_D && sizeof...(args) == 10)
+      {
+        ::glTextureSubImage3D(
+          name()
+          , std::forward<ARGS>(args)...
+        );
+      }
+      else
+      {
+        static_assert(false, "Invalid number of arguments for texture target.");
+      }
+    }
+
   };
 
 }

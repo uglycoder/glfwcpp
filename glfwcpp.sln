@@ -10,6 +10,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "instancedCubes", "instanced
 		{7AD9A0F4-AB78-43B6-A4EC-416A4329A8A5} = {7AD9A0F4-AB78-43B6-A4EC-416A4329A8A5}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "simpleTexture", "simpleTexture\simpleTexture.vcxproj", "{8498E53D-BE2D-4ECE-A8A3-8F526615151E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7AD9A0F4-AB78-43B6-A4EC-416A4329A8A5} = {7AD9A0F4-AB78-43B6-A4EC-416A4329A8A5}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -34,6 +39,14 @@ Global
 		{B6AA7BB3-5EA1-4C50-9E56-7DF9D8BD243E}.Release|x64.Build.0 = Release|x64
 		{B6AA7BB3-5EA1-4C50-9E56-7DF9D8BD243E}.Release|x86.ActiveCfg = Release|Win32
 		{B6AA7BB3-5EA1-4C50-9E56-7DF9D8BD243E}.Release|x86.Build.0 = Release|Win32
+		{8498E53D-BE2D-4ECE-A8A3-8F526615151E}.Debug|x64.ActiveCfg = Debug|x64
+		{8498E53D-BE2D-4ECE-A8A3-8F526615151E}.Debug|x64.Build.0 = Debug|x64
+		{8498E53D-BE2D-4ECE-A8A3-8F526615151E}.Debug|x86.ActiveCfg = Debug|Win32
+		{8498E53D-BE2D-4ECE-A8A3-8F526615151E}.Debug|x86.Build.0 = Debug|Win32
+		{8498E53D-BE2D-4ECE-A8A3-8F526615151E}.Release|x64.ActiveCfg = Release|x64
+		{8498E53D-BE2D-4ECE-A8A3-8F526615151E}.Release|x64.Build.0 = Release|x64
+		{8498E53D-BE2D-4ECE-A8A3-8F526615151E}.Release|x86.ActiveCfg = Release|Win32
+		{8498E53D-BE2D-4ECE-A8A3-8F526615151E}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

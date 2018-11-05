@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+    <GLAD_ROOT_DIR>D:\dev\glad-4-6</GLAD_ROOT_DIR>
+    <GLAD_INCLUDE_DIR>$(GLAD_ROOT_DIR)/include</GLAD_INCLUDE_DIR>
+    <GLAD_SOURCE_DIR>$(GLAD_ROOT_DIR)/src</GLAD_SOURCE_DIR>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemDefinitionGroup />
+  <ItemGroup>
+    <BuildMacro Include="GLAD_ROOT_DIR">
+      <Value>$(GLAD_ROOT_DIR)</Value>
+    </BuildMacro>
+    <BuildMacro Include="GLAD_INCLUDE_DIR">
+      <Value>$(GLAD_INCLUDE_DIR)</Value>
+    </BuildMacro>
+    <BuildMacro Include="GLAD_SOURCE_DIR">
+      <Value>$(GLAD_SOURCE_DIR)</Value>
+    </BuildMacro>
+  </ItemGroup>
+</Project>
