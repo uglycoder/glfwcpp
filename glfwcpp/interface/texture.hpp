@@ -27,7 +27,7 @@ namespace GLFWPP_ns
   class TextureBase
   {
   public:  
-    TextureBase()                            = delete;
+    TextureBase()                                = delete;
     TextureBase(TextureBase const &)             = delete;
     TextureBase & operator=(TextureBase const &) = delete;
 

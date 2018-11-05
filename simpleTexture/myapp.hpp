@@ -161,9 +161,9 @@ private:
   {
     auto data{std::make_unique<float[]>(width * height * sizeof(float))};
 
-    for(int y = 0; y < height; y++)
+    for(int y{}; y < height; ++y)
     {
-      for(int x = 0; x < width; x++)
+      for(int x{}; x < width; ++x)
       {
         data[(y * width + x) * 4 + 0] = (float)((x & y) & 0xFF) / 255.0f;
         data[(y * width + x) * 4 + 1] = (float)((x | y) & 0xFF) / 255.0f;
