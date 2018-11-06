@@ -75,6 +75,9 @@
     <ClCompile Include="src\window.cpp">
       <Filter>Source Files\src</Filter>
     </ClCompile>
+    <ClCompile Include="src\ktxutils.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\common_stl_hdrs.hpp">
@@ -100,9 +103,6 @@
     </ClInclude>
     <ClInclude Include="glad\glad.h">
       <Filter>Header Files\glad</Filter>
-    </ClInclude>
-    <ClInclude Include="src\stdafx.h">
-      <Filter>Header Files\src</Filter>
     </ClInclude>
     <ClInclude Include="src\targetver.h">
       <Filter>Header Files\src</Filter>
@@ -141,6 +141,9 @@
       <Filter>Header Files\interface</Filter>
     </ClInclude>
     <ClInclude Include="interface\window.hpp">
+      <Filter>Header Files\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\ktxutils.hpp">
       <Filter>Header Files\interface</Filter>
     </ClInclude>
   </ItemGroup>

@@ -30,6 +30,7 @@
     <ClCompile Include="src\glbuffer.cpp" />
     <ClCompile Include="src\glslprogram.cpp" />
     <ClCompile Include="src\hints.cpp" />
+    <ClCompile Include="src\ktxutils.cpp" />
     <ClCompile Include="src\texture.cpp" />
     <ClCompile Include="src\utils.cpp" />
     <ClCompile Include="src\vertexarrayobject.cpp" />
@@ -58,6 +59,7 @@
     <ClInclude Include="interface\glbuffer.hpp" />
     <ClInclude Include="interface\glslprogram.hpp" />
     <ClInclude Include="interface\hints.hpp" />
+    <ClInclude Include="interface\ktxutils.hpp" />
     <ClInclude Include="interface\texture.hpp" />
     <ClInclude Include="interface\utils.hpp" />
     <ClInclude Include="interface\vertexarrayobject.hpp" />
@@ -69,7 +71,6 @@
     <ClInclude Include="interface\globalutils.hpp" />
     <ClInclude Include="interface\maths.hpp" />
     <ClInclude Include="src\precompiled-header.hpp" />
-    <ClInclude Include="src\stdafx.h" />
     <ClInclude Include="src\targetver.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

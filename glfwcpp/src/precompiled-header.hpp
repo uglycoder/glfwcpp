@@ -1,6 +1,8 @@
 #pragma once
 
-#include "stdafx.h"
+#include "targetver.h"
+
+#define WIN32_LEAN_AND_MEAN             // Exclude rarely-used stuff from Windows headers
 
 #include "../include/common_stl_hdrs.hpp"
 
