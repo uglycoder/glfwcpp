@@ -91,7 +91,7 @@ public:
               << "Forward compatibility is " << att.forward << '\n'
               << "Debug is " << att.debug << '\n';
 
-    std::string const vs_source
+    char const * const vs_source
     {
         "#version 420 core                                                              \n"
         "                                                                               \n"
@@ -105,7 +105,7 @@ public:
         "}                                                                              \n"
     };
 
-    std::string const fs_source
+    char const * const fs_source
     {
         "#version 430 core                                                              \n"
         "                                                                               \n"

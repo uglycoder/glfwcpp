@@ -73,6 +73,8 @@ namespace GLFWPP_ns
     {
       static_assert(sizeof...(args) > 2 && sizeof...(args) < 6, "Invalid number of arguments.");
 
+      assert(::glIsTexture(name()));
+
       if constexpr(texTarget == OGL_TEXTURE_TARGETS::ONE_D && sizeof...(args) == 3)
       {
         ::glTextureStorage1D(
@@ -104,6 +106,8 @@ namespace GLFWPP_ns
     void loadData(ARGS &&... args) noexcept
     {
       static_assert(sizeof...(args) > 5 && sizeof...(args) < 11, "Invalid number of arguments.");
+
+      assert(::glIsTexture(name()));
 
       if constexpr(texTarget == OGL_TEXTURE_TARGETS::ONE_D && sizeof...(args) == 6)
       {
