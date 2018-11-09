@@ -77,12 +77,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\common_stl_hdrs.hpp">
-      <Filter>Header Files\include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\macros.hpp">
-      <Filter>Header Files\include</Filter>
-    </ClInclude>
     <ClInclude Include="interface\glfwpp.hpp">
       <Filter>Header Files\interface</Filter>
     </ClInclude>
@@ -139,6 +133,12 @@
     </ClInclude>
     <ClInclude Include="interface\window.hpp">
       <Filter>Header Files\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\common_stl_hdrs.hpp">
+      <Filter>Header Files\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\macros.hpp">
+      <Filter>Header Files\include</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

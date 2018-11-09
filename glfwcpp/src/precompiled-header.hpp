@@ -4,7 +4,7 @@
 
 #define WIN32_LEAN_AND_MEAN             // Exclude rarely-used stuff from Windows headers
 
-#include "../include/common_stl_hdrs.hpp"
+#include "../../include/common_stl_hdrs.hpp"
 
 #include "../glad/glad.h"
 #include <GLFW/glfw3.h>

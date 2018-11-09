@@ -49,9 +49,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\common_stl_hdrs.hpp" />
+    <ClInclude Include="..\include\macros.hpp" />
     <ClInclude Include="glad\glad.h" />
-    <ClInclude Include="include\common_stl_hdrs.hpp" />
-    <ClInclude Include="include\macros.hpp" />
     <ClInclude Include="interface\glfwpp.hpp" />
     <ClInclude Include="interface\application.hpp" />
     <ClInclude Include="interface\exception.hpp" />
@@ -112,31 +112,31 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="propertySheets\glad.props" />
-    <Import Project="propertySheets\glfw.props" />
-    <Import Project="propertySheets\glm.props" />
     <Import Project="..\propertySheets\common.props" />
+    <Import Project="..\propertySheets\glad.props" />
+    <Import Project="..\propertySheets\glfw.props" />
+    <Import Project="..\propertySheets\glm.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="propertySheets\glad.props" />
-    <Import Project="propertySheets\glfw.props" />
-    <Import Project="propertySheets\glm.props" />
     <Import Project="..\propertySheets\common.props" />
+    <Import Project="..\propertySheets\glad.props" />
+    <Import Project="..\propertySheets\glfw.props" />
+    <Import Project="..\propertySheets\glm.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="propertySheets\glad.props" />
-    <Import Project="propertySheets\glfw.props" />
-    <Import Project="propertySheets\glm.props" />
     <Import Project="..\propertySheets\common.props" />
+    <Import Project="..\propertySheets\glad.props" />
+    <Import Project="..\propertySheets\glfw.props" />
+    <Import Project="..\propertySheets\glm.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="propertySheets\glad.props" />
-    <Import Project="propertySheets\glfw.props" />
-    <Import Project="propertySheets\glm.props" />
     <Import Project="..\propertySheets\common.props" />
+    <Import Project="..\propertySheets\glad.props" />
+    <Import Project="..\propertySheets\glfw.props" />
+    <Import Project="..\propertySheets\glm.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
