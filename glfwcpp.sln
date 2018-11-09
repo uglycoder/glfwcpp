@@ -15,6 +15,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "simpleTexture", "simpleText
 		{7AD9A0F4-AB78-43B6-A4EC-416A4329A8A5} = {7AD9A0F4-AB78-43B6-A4EC-416A4329A8A5}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "oglLimitsAndSettings", "oglLimitsAndSettings\oglLimitsAndSettings.vcxproj", "{B5DC5F1D-BE67-4E93-BCF9-D8380C1F77BA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -47,6 +49,14 @@ Global
 		{8498E53D-BE2D-4ECE-A8A3-8F526615151E}.Release|x64.Build.0 = Release|x64
 		{8498E53D-BE2D-4ECE-A8A3-8F526615151E}.Release|x86.ActiveCfg = Release|Win32
 		{8498E53D-BE2D-4ECE-A8A3-8F526615151E}.Release|x86.Build.0 = Release|Win32
+		{B5DC5F1D-BE67-4E93-BCF9-D8380C1F77BA}.Debug|x64.ActiveCfg = Debug|x64
+		{B5DC5F1D-BE67-4E93-BCF9-D8380C1F77BA}.Debug|x64.Build.0 = Debug|x64
+		{B5DC5F1D-BE67-4E93-BCF9-D8380C1F77BA}.Debug|x86.ActiveCfg = Debug|Win32
+		{B5DC5F1D-BE67-4E93-BCF9-D8380C1F77BA}.Debug|x86.Build.0 = Debug|Win32
+		{B5DC5F1D-BE67-4E93-BCF9-D8380C1F77BA}.Release|x64.ActiveCfg = Release|x64
+		{B5DC5F1D-BE67-4E93-BCF9-D8380C1F77BA}.Release|x64.Build.0 = Release|x64
+		{B5DC5F1D-BE67-4E93-BCF9-D8380C1F77BA}.Release|x86.ActiveCfg = Release|Win32
+		{B5DC5F1D-BE67-4E93-BCF9-D8380C1F77BA}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
