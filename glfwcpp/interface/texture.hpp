@@ -24,6 +24,8 @@ namespace GLFWPP_ns
     , TWO_D_MULTISAMPLE_ARRAY = GL_TEXTURE_2D_MULTISAMPLE_ARRAY
   };
 
+  OGL_TEXTURE_TARGETS GetTargetOfTexture(::GLuint name) noexcept;
+
   class TextureBase
   {
   public:  
@@ -137,6 +139,8 @@ namespace GLFWPP_ns
     }
 
   };
+
+  ::GLuint LoadTexture(std::filesystem::path const & filename, ::GLuint textureName);
 
 }
 

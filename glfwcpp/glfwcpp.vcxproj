@@ -30,7 +30,6 @@
     <ClCompile Include="src\glbuffer.cpp" />
     <ClCompile Include="src\glslprogram.cpp" />
     <ClCompile Include="src\hints.cpp" />
-    <ClCompile Include="src\ktxutils.cpp" />
     <ClCompile Include="src\texture.cpp" />
     <ClCompile Include="src\utils.cpp" />
     <ClCompile Include="src\vertexarrayobject.cpp" />
@@ -59,7 +58,6 @@
     <ClInclude Include="interface\glbuffer.hpp" />
     <ClInclude Include="interface\glslprogram.hpp" />
     <ClInclude Include="interface\hints.hpp" />
-    <ClInclude Include="interface\ktxutils.hpp" />
     <ClInclude Include="interface\texture.hpp" />
     <ClInclude Include="interface\utils.hpp" />
     <ClInclude Include="interface\vertexarrayobject.hpp" />

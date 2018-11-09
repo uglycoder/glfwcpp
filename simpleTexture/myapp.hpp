@@ -132,6 +132,8 @@ public:
     m_program.printActiveUniforms(std::cout);
     m_program.printActiveUniformBlocks(std::cout);
 
+    auto const & target{GLFWPP_ns::GetTargetOfTexture(m_texture.name())};
+
     m_texture.allocateImmutableStorage(
       8,               // 8 mipmap levels
       GL_RGBA32F,      // 32-bit floating-point RGBA data
@@ -148,6 +150,8 @@ public:
       GL_FLOAT,       // Floating point data
       data.get()
     );
+
+    auto res{ GLFWPP_ns::LoadTexture("baboon.ktx", 0) };
 
     return true;
   }
