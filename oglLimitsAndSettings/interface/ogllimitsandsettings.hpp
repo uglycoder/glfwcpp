@@ -7,9 +7,9 @@
 #include <vector>
 
 #ifdef OGLLIMITSANDSETTINGS_EXPORTS
-#define DllExport   __declspec( dllexport )
+#define OGLLIMITSANDSETTINGS_API   __declspec( dllexport )
 #else
-#define DllExport   __declspec( dllimport )
+#define OGLLIMITSANDSETTINGS_API   __declspec( dllimport )
 #endif
 
 namespace OGLLimitsAndSettings_ns
@@ -106,5 +106,5 @@ namespace OGLLimitsAndSettings_ns
 
   };
 
-  DllExport std::vector<int> const GetSingleValueLimits() noexcept;
+  OGLLIMITSANDSETTINGS_API std::vector<int> const GetSingleValueLimits() noexcept;
 }
