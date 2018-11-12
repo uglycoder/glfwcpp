@@ -106,5 +106,5 @@ namespace OGLLimitsAndSettings_ns
 
   };
 
-  DllExport std::vector<int> GetSingleValueLimits() noexcept;
+  DllExport std::vector<int> const GetSingleValueLimits() noexcept;
 }

@@ -22,6 +22,12 @@
     <Filter Include="Header Files\interface">
       <UniqueIdentifier>{29fbcf6e-9a0f-472b-93e2-967d6cf5d15c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\glad">
+      <UniqueIdentifier>{c0fb6e6f-f1f3-4e3f-b3c9-2451b3a4b701}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\glad">
+      <UniqueIdentifier>{f34e10f0-0d86-4529-8a34-b44bcf0ac6ef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\dllmain.cpp">
@@ -33,6 +39,9 @@
     <ClCompile Include="src\ogllimitsandsettings.cpp">
       <Filter>Source Files\src</Filter>
     </ClCompile>
+    <ClCompile Include="glad\glad.c">
+      <Filter>Source Files\glad</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h">
@@ -42,6 +51,12 @@
       <Filter>Header Files\src</Filter>
     </ClInclude>
     <ClInclude Include="interface\ogllimitsandsettings.hpp">
+      <Filter>Header Files\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="glad\glad.h">
+      <Filter>Header Files\glad</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\glheader.h">
       <Filter>Header Files\interface</Filter>
     </ClInclude>
   </ItemGroup>
