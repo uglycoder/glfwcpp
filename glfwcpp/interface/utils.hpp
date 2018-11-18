@@ -36,7 +36,7 @@ namespace GLFWPP_ns
   void PrintGLVersionInfo(std::ostream & os, bool printExtensions = false);
 
   // Returns true if error occurred
-  bool CheckForOpenGLError(
+  [[nodiscard]] bool CheckForOpenGLError(
     std::ostream & os
     ,std::string const & filename
     ,std::string const & line
@@ -54,7 +54,9 @@ namespace GLFWPP_ns
 
   void SetDefaultDebugCallback(std::ostream & os) noexcept;
 
-  std::string GetTypeString( ::GLenum type );
+  [[nodiscard]] std::string GetTypeString( ::GLenum type );
+
+  [[nodiscard]] std::vector<int> const GetOGLSingleValueLimits() noexcept;
 
 }
 

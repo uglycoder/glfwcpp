@@ -225,3 +225,7 @@ std::string GLFWPP_ns::GetTypeString( ::GLenum type )
   }
 }
 
+std::vector<int> const GLFWPP_ns::GetOGLSingleValueLimits() noexcept
+{
+  return std::vector<int>(256, -1);
+}

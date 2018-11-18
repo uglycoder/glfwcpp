@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.28010.2041
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "glfwcpp", "glfwcpp\glfwcpp.vcxproj", "{7AD9A0F4-AB78-43B6-A4EC-416A4329A8A5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B5DC5F1D-BE67-4E93-BCF9-D8380C1F77BA} = {B5DC5F1D-BE67-4E93-BCF9-D8380C1F77BA}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "instancedCubes", "instancedCubes\instancedCubes.vcxproj", "{B6AA7BB3-5EA1-4C50-9E56-7DF9D8BD243E}"
 	ProjectSection(ProjectDependencies) = postProject

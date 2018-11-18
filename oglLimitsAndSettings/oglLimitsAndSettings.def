@@ -1,0 +1,4 @@
+LIBRARY	oglLimitsAndSettings
+
+EXPORTS
+	?GetSingleValueLimits@OGLLimitsAndSettings_ns@@YA?BV?$vector@HV?$allocator@H@std@@@std@@XZ @1

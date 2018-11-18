@@ -4,13 +4,9 @@
 
 #pragma once
 
-#include <vector>
 
-#ifdef OGLLIMITSANDSETTINGS_EXPORTS
-#define OGLLIMITSANDSETTINGS_API   __declspec( dllexport )
-#else
-#define OGLLIMITSANDSETTINGS_API   __declspec( dllimport )
-#endif
+
+template class std::vector<int>;
 
 namespace OGLLimitsAndSettings_ns
 {
@@ -106,5 +102,7 @@ namespace OGLLimitsAndSettings_ns
 
   };
 
-  OGLLIMITSANDSETTINGS_API std::vector<int> const GetSingleValueLimits() noexcept;
+  std::vector<int> const GetSingleValueLimits() noexcept;
+
+  using Func1 = decltype(GetSingleValueLimits);
 }
