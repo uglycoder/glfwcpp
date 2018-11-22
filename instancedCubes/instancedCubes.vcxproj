@@ -116,7 +116,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SOLUTIONDIR)glfwcpp\interface;$(GLFW_INCLUDE_DIR);$(GLM_ROOT_DIR);$(GLAD_INCLUDE_DIR);$(GLAD_SOURCE_DIR)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(SOLUTIONDIR)glfwcpp\interface;$(GLFW_INCLUDE_DIR);$(GLM_ROOT_DIR);$(GLAD_INCLUDE_DIR);$(GLAD_SOURCE_DIR)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -135,7 +135,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SOLUTIONDIR)glfwcpp\interface;$(GLFW_INCLUDE_DIR);$(GLM_ROOT_DIR);$(GLAD_INCLUDE_DIR);$(GLAD_SOURCE_DIR)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(SOLUTIONDIR)glfwcpp\interface;$(GLFW_INCLUDE_DIR);$(GLM_ROOT_DIR);$(GLAD_INCLUDE_DIR);$(GLAD_SOURCE_DIR)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -156,7 +156,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SOLUTIONDIR)glfwcpp\interface;$(GLFW_INCLUDE_DIR);$(GLM_ROOT_DIR);$(GLAD_INCLUDE_DIR);$(GLAD_SOURCE_DIR)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(SOLUTIONDIR)glfwcpp\interface;$(GLFW_INCLUDE_DIR);$(GLM_ROOT_DIR);$(GLAD_INCLUDE_DIR);$(GLAD_SOURCE_DIR)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -179,7 +179,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SOLUTIONDIR)glfwcpp\interface;$(GLFW_INCLUDE_DIR);$(GLM_ROOT_DIR);$(GLAD_INCLUDE_DIR);$(GLAD_SOURCE_DIR)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(SOLUTIONDIR)glfwcpp\interface;$(GLFW_INCLUDE_DIR);$(GLM_ROOT_DIR);$(GLAD_INCLUDE_DIR);$(GLAD_SOURCE_DIR)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

@@ -30,6 +30,7 @@
     <ClCompile Include="src\glbuffer.cpp" />
     <ClCompile Include="src\glslprogram.cpp" />
     <ClCompile Include="src\hints.cpp" />
+    <ClCompile Include="src\oglproperties.cpp" />
     <ClCompile Include="src\texture.cpp" />
     <ClCompile Include="src\utils.cpp" />
     <ClCompile Include="src\vertexarrayobject.cpp" />
@@ -58,6 +59,7 @@
     <ClInclude Include="interface\glbuffer.hpp" />
     <ClInclude Include="interface\glslprogram.hpp" />
     <ClInclude Include="interface\hints.hpp" />
+    <ClInclude Include="interface\oglproperties.hpp" />
     <ClInclude Include="interface\texture.hpp" />
     <ClInclude Include="interface\utils.hpp" />
     <ClInclude Include="interface\vertexarrayobject.hpp" />
@@ -178,7 +180,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <PrecompiledHeaderFile>precompiled-header.hpp</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(GLFW_INCLUDE_DIR);$(GLM_ROOT_DIR);$(GLAD_INCLUDE_DIR);$(GLAD_SOURCE_DIR)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(GLFW_INCLUDE_DIR);$(GLM_ROOT_DIR);$(GLAD_INCLUDE_DIR);$(GLAD_SOURCE_DIR);$(SolutionDir)</AdditionalIncludeDirectories>
       <EnablePREfast>true</EnablePREfast>
       <AdditionalOptions>/Zm200 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
@@ -186,6 +188,10 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <AdditionalDependencies>oglLimitsAndSettings.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir)</AdditionalLibraryDirectories>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -198,7 +204,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <PrecompiledHeaderFile>precompiled-header.hpp</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(GLFW_INCLUDE_DIR);$(GLM_ROOT_DIR);$(GLAD_INCLUDE_DIR);$(GLAD_SOURCE_DIR)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(GLFW_INCLUDE_DIR);$(GLM_ROOT_DIR);$(GLAD_INCLUDE_DIR);$(GLAD_SOURCE_DIR);$(SolutionDir)</AdditionalIncludeDirectories>
       <EnablePREfast>true</EnablePREfast>
       <AdditionalOptions>/Zm200 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
@@ -206,6 +212,10 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <AdditionalDependencies>oglLimitsAndSettings.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir)</AdditionalLibraryDirectories>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -220,7 +230,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <PrecompiledHeaderFile>precompiled-header.hpp</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(GLFW_INCLUDE_DIR);$(GLM_ROOT_DIR);$(GLAD_INCLUDE_DIR);$(GLAD_SOURCE_DIR)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(GLFW_INCLUDE_DIR);$(GLM_ROOT_DIR);$(GLAD_INCLUDE_DIR);$(GLAD_SOURCE_DIR);$(SolutionDir)</AdditionalIncludeDirectories>
       <AdditionalOptions>/Zm200 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
@@ -229,6 +239,10 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <AdditionalDependencies>oglLimitsAndSettings.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir)</AdditionalLibraryDirectories>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -243,7 +257,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <PrecompiledHeaderFile>precompiled-header.hpp</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(GLFW_INCLUDE_DIR);$(GLM_ROOT_DIR);$(GLAD_INCLUDE_DIR);$(GLAD_SOURCE_DIR)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(GLFW_INCLUDE_DIR);$(GLM_ROOT_DIR);$(GLAD_INCLUDE_DIR);$(GLAD_SOURCE_DIR);$(SolutionDir)</AdditionalIncludeDirectories>
       <AdditionalOptions>/Zm200 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
@@ -252,6 +266,10 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <AdditionalDependencies>oglLimitsAndSettings.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir)</AdditionalLibraryDirectories>
+    </Lib>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -6,53 +6,7 @@
 
 #include "windows_utils.hpp"
 
-  /// <summary>
-  /// OpenGL_Window_Context: Simple struct for OpenGL contexts.
-  /// </summary>
-  /// <remarks>
-  /// Client code setups the data members as required.
-  /// </remarks>
-struct oglwindow_ns::OpenGL_Window_Context final
-{
-  ::HWND        wnd{};
-  ::HDC         hdc{};
-  ::HGLRC       hglrc{};
-  ::HINSTANCE   hinstance{ ::GetModuleHandle(nullptr) };
-  std::wstring  className;
 
-  OpenGL_Window_Context() = default;
-  ~OpenGL_Window_Context() noexcept
-  {
-    if(wnd)
-    {
-      deleteContext();
-      ::ReleaseDC(wnd, hdc);
-      ::DestroyWindow(wnd);
-      ::UnregisterClass(className.c_str(), hinstance);
-    }
-  }
-
-  OpenGL_Window_Context(OpenGL_Window_Context const &) = delete;
-  OpenGL_Window_Context & operator=(OpenGL_Window_Context const &) = delete;
-
-  OpenGL_Window_Context(OpenGL_Window_Context &&) = delete;
-  OpenGL_Window_Context & operator=(OpenGL_Window_Context &&) = delete;
-
-  /// <summary>
-  /// deleteContext(): Deletes the OpenGL context associated with a set of valid wnd, hdc, hInstance
-  /// data members
-  /// </summary>
-  void deleteContext() & noexcept
-  {
-    assert(wnd && hdc && hinstance);
-
-    if(hglrc)
-    {
-      ::wglDeleteContext(hglrc);
-      hglrc = nullptr;
-    }
-  }
-};
 
 oglwindow_ns::OGL_Window_result_t oglwindow_ns::CreateTemporaryOGL_Window(int pixelFormat /*= 1*/) noexcept
 {

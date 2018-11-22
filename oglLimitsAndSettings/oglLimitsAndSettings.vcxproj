@@ -35,13 +35,14 @@
     <ClCompile Include="src\windows_utils.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\glad.h" />
-    <ClInclude Include="src\khrplatform.h" />
-    <ClInclude Include="src\ogllimitsandsettings.hpp" />
+    <ClInclude Include="interface\ogllimitsandsettings.hpp" />
     <ClInclude Include="src\oglwindow.hpp" />
     <ClInclude Include="src\stdafx.h" />
     <ClInclude Include="src\targetver.h" />
     <ClInclude Include="src\windows_utils.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="oglLimitsAndSettings.def" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

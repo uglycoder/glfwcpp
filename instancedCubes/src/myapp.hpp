@@ -15,6 +15,7 @@
 #include <vertexbuffer.hpp>
 #include <vertexindexbuffer.hpp>
 #include <texture.hpp>
+#include <oglproperties.hpp>
 
 #include <GLFW/glfw3.h>
 
@@ -103,6 +104,7 @@ public:
 
   bool init() override
   {
+    auto const & something = GLFWPP_ns::svLimitsMap.at(GL_MAX_3D_TEXTURE_SIZE).second;
     auto const att = getContext();
     std::cout << std::boolalpha
               << "Context attributes:\napi = "

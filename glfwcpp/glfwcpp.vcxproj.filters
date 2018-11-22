@@ -75,6 +75,9 @@
     <ClCompile Include="src\window.cpp">
       <Filter>Source Files\src</Filter>
     </ClCompile>
+    <ClCompile Include="src\oglproperties.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="interface\glfwpp.hpp">
@@ -139,6 +142,9 @@
     </ClInclude>
     <ClInclude Include="..\include\macros.hpp">
       <Filter>Header Files\include</Filter>
+    </ClInclude>
+    <ClInclude Include="interface\oglproperties.hpp">
+      <Filter>Header Files\interface</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

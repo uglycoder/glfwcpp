@@ -13,40 +13,31 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\src">
-      <UniqueIdentifier>{4f4a2aea-beaa-47b9-9fe5-694ea2f37183}</UniqueIdentifier>
+    <Filter Include="def">
+      <UniqueIdentifier>{0e9445f7-89bb-4dc2-9246-b53c112ac177}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\glad">
-      <UniqueIdentifier>{f34e10f0-0d86-4529-8a34-b44bcf0ac6ef}</UniqueIdentifier>
+    <Filter Include="Header Files\interface">
+      <UniqueIdentifier>{d8257cf2-6aa6-4016-b27c-75dfa8680b45}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\dllmain.cpp">
-      <Filter>Source Files\src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\stdafx.cpp">
-      <Filter>Source Files\src</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\ogllimitsandsettings.cpp">
-      <Filter>Source Files\src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\windows_utils.cpp">
-      <Filter>Source Files\src</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\oglwindow.cpp">
-      <Filter>Source Files\src</Filter>
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\windows_utils.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\glad.h">
-      <Filter>Header Files\glad</Filter>
-    </ClInclude>
-    <ClInclude Include="src\khrplatform.h">
-      <Filter>Header Files\glad</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ogllimitsandsettings.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\oglwindow.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -59,5 +50,13 @@
     <ClInclude Include="src\windows_utils.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="interface\ogllimitsandsettings.hpp">
+      <Filter>Header Files\interface</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="oglLimitsAndSettings.def">
+      <Filter>def</Filter>
+    </None>
   </ItemGroup>
 </Project>
