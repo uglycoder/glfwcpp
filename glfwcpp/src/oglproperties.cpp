@@ -4,18 +4,35 @@
 
 #include  "../interface/oglproperties.hpp"
 
+#include <oglLimitsAndSettings/interface/ogllimitsandsettings.hpp>
 
+namespace OGLimit = OGLLimitsAndSettings_ns;
+using limitsMap_t = OGLimit::svLimitsMap_t;
+using limitsVal_t = OGLimit::limitsValue_t;
 namespace
 {
-  OGLLimitsAndSettings_ns::svLimitsMap_t GetSingleValueLimits() noexcept;
+  limitsMap_t GetSingleValueLimits() noexcept;
+  limitsMap_t const svLimitsMap{ GetSingleValueLimits() };
 }
 
-OGLLimitsAndSettings_ns::svLimitsMap_t const GLFWPP_ns::svLimitsMap{GetSingleValueLimits()};
+OGLimit::limitsValue_t GLFWPP_ns::GetSVLimit(int ogldefine) noexcept
+{
+  assert(!svLimitsMap.empty() && "svLimitsMap should not be empty");
+  try
+  {
+    return svLimitsMap.at(ogldefine);
+  }
+  catch(std::exception const & e)
+  {
+    using namespace std::literals;
+    return{0, "", "Error: "s + e.what() + ": " __FUNCTION__};
+  }
+}
 
 
 namespace
 {
-  OGLLimitsAndSettings_ns::svLimitsMap_t GetSingleValueLimits() noexcept
+  limitsMap_t GetSingleValueLimits() noexcept
   {
     using funcPtr = OGLLimitsAndSettings_ns::func1ptr;
 
@@ -37,10 +54,10 @@ namespace
         {
           return svMap.svLimitsMap;
         }
-        return {std::make_pair(-1, std::make_pair(-1, svMap.errMsg))};
+        return { {0, { 0, "", svMap.errMsg }} };
       }
-      return { std::make_pair(-1, std::make_pair(-1, "GetProcAddress() failed"))};
+      return { {0, {0, "", "GetProcAddress() failed"}} };
     }
-    return { std::make_pair(-1, std::make_pair(-1, "LoadLibrary() failed")) };
+    return { {0,{0, "", "LoadLibrary() failed"}} };
   }
 }

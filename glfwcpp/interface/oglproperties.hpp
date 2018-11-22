@@ -6,5 +6,5 @@
 
 namespace GLFWPP_ns
 {
-  extern OGLLimitsAndSettings_ns::svLimitsMap_t const svLimitsMap;
+  [[nodiscard]] OGLLimitsAndSettings_ns::limitsValue_t GetSVLimit(int ogldefine) noexcept;
 }

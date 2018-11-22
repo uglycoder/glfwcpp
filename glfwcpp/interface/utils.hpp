@@ -55,8 +55,5 @@ namespace GLFWPP_ns
   void SetDefaultDebugCallback(std::ostream & os) noexcept;
 
   [[nodiscard]] std::string GetTypeString( ::GLenum type );
-
-  [[nodiscard]] std::vector<int> const GetOGLSingleValueLimits() noexcept;
-
 }
 

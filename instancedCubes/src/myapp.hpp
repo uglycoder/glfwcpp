@@ -104,7 +104,7 @@ public:
 
   bool init() override
   {
-    auto const & something = GLFWPP_ns::svLimitsMap.at(GL_MAX_3D_TEXTURE_SIZE).second;
+    auto const & something = GLFWPP_ns::GetSVLimit(GL_MAX_3D_TEXTURE_SIZE).value;
     auto const att = getContext();
     std::cout << std::boolalpha
               << "Context attributes:\napi = "

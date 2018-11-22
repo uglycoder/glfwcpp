@@ -6,13 +6,13 @@
 #include "precompiled-header.hpp"
 
 #include "../interface/utils.hpp"
-
-#include "../interface/glheader.h"
+#include "../interface/oglproperties.hpp"
 
 
 void GLFWPP_ns::LabelObject(OGL_LABEL_NAMESPACE ns, ::GLuint name, std::string const & label) noexcept
 {
-  assert(static_cast<::GLint>(label.size()) < [] {::GLint maxLength; ::glGetIntegerv(GL_MAX_LABEL_LENGTH, &maxLength); return maxLength; }());
+  assert(static_cast<::GLint>(label.size()) < GetSVLimit(GL_MAX_LABEL_LENGTH).value);
+  auto const len{ GetSVLimit(GL_MAX_LABEL_LENGTH)};
 
   ::GLsizei const size{(!label.empty() ? -1 : 0)};
   char const * const strPtr{size ? label.c_str() : nullptr};
@@ -225,7 +225,3 @@ std::string GLFWPP_ns::GetTypeString( ::GLenum type )
   }
 }
 
-std::vector<int> const GLFWPP_ns::GetOGLSingleValueLimits() noexcept
-{
-  return std::vector<int>(256, -1);
-}

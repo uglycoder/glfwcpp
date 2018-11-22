@@ -1,4 +1,4 @@
-// oglLimitsAndSettings.hpp
+// ogllimitsAndSettings.hpp
 
 
 
@@ -7,13 +7,19 @@
 #include <cstdint>
 #include <map>
 #include <string>
-#include <utility>
+
 
 
 namespace OGLLimitsAndSettings_ns
 {
+  struct limitsValue_t
+  {
+    int64_t value{};
+    std::string keyStr;
+    std::string errMsg;
+  };
 
-  using svLimitsMap_t = std::map<unsigned int, std::pair<int64_t, std::string>>;
+  using svLimitsMap_t = std::map<unsigned int, limitsValue_t>;
  
   struct OGL_SingleValueLimits
   {
