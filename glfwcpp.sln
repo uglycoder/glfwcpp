@@ -20,6 +20,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "simpleTexture", "simpleText
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "oglLimitsAndSettings", "oglLimitsAndSettings\oglLimitsAndSettings.vcxproj", "{B5DC5F1D-BE67-4E93-BCF9-D8380C1F77BA}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "printOpenGLlimits", "printOpenGLlimits\printOpenGLlimits.vcxproj", "{14DA9878-CA79-4828-957A-E32E79162512}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B5DC5F1D-BE67-4E93-BCF9-D8380C1F77BA} = {B5DC5F1D-BE67-4E93-BCF9-D8380C1F77BA}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -60,6 +65,14 @@ Global
 		{B5DC5F1D-BE67-4E93-BCF9-D8380C1F77BA}.Release|x64.Build.0 = Release|x64
 		{B5DC5F1D-BE67-4E93-BCF9-D8380C1F77BA}.Release|x86.ActiveCfg = Release|Win32
 		{B5DC5F1D-BE67-4E93-BCF9-D8380C1F77BA}.Release|x86.Build.0 = Release|Win32
+		{14DA9878-CA79-4828-957A-E32E79162512}.Debug|x64.ActiveCfg = Debug|x64
+		{14DA9878-CA79-4828-957A-E32E79162512}.Debug|x64.Build.0 = Debug|x64
+		{14DA9878-CA79-4828-957A-E32E79162512}.Debug|x86.ActiveCfg = Debug|Win32
+		{14DA9878-CA79-4828-957A-E32E79162512}.Debug|x86.Build.0 = Debug|Win32
+		{14DA9878-CA79-4828-957A-E32E79162512}.Release|x64.ActiveCfg = Release|x64
+		{14DA9878-CA79-4828-957A-E32E79162512}.Release|x64.Build.0 = Release|x64
+		{14DA9878-CA79-4828-957A-E32E79162512}.Release|x86.ActiveCfg = Release|Win32
+		{14DA9878-CA79-4828-957A-E32E79162512}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
