@@ -25,15 +25,15 @@
 
 namespace
 {
-  LRESULT CALLBACK WndProc(
+  [[nodiscard]] LRESULT CALLBACK WndProc(
     ::HWND	hWnd,                       // Handle For This Window
     unsigned int	uMsg,                 // Message For This Window
     WPARAM	wParam,                     // Additional Message Information
     LPARAM	lParam)	noexcept;           // Additional Message Information
 
-  ::ATOM RegisterWndClass(::WNDCLASSEX const & wc) noexcept;
+  [[nodiscard]] ::ATOM RegisterWndClass(::WNDCLASSEX const & wc) noexcept;
 
-  std::wstring CreateWndClassName() noexcept;
+  [[nodiscard]] std::wstring CreateWndClassName() noexcept;
 }
 
 //#########################################################################################
@@ -60,7 +60,7 @@ std::tuple<::HWND, std::wstring, ::HINSTANCE> windows_ns::CreateTemporaryWindow(
   };
 
 
-  RegisterWndClass(wc);
+  if(!RegisterWndClass(wc)) return{};
 
   DWORD dwExtStyle{ WS_EX_APPWINDOW | WS_EX_WINDOWEDGE };
   DWORD dwWindStyle{ WS_OVERLAPPEDWINDOW };

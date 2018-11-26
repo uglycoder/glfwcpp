@@ -10,7 +10,7 @@ namespace oglwindow_ns
  /// <remarks>
  /// Client code setups the data members as required.
  /// </remarks>
-  struct OpenGL_Window_Context final
+  struct[[nodiscard]] OpenGL_Window_Context final
   {
     ::HWND        wnd{};
     ::HDC         hdc{};
@@ -54,7 +54,7 @@ namespace oglwindow_ns
 
   using OGL_ctxt_ptr = std::unique_ptr<OpenGL_Window_Context>;
 
-  struct OGL_Window_result_t
+  struct[[nodiscard]] OGL_Window_result_t
   {
     bool succeeded{};
     std::string errStr;

@@ -11,7 +11,7 @@ using limitsMap_t = OGLimit::svLimitsMap_t;
 using limitsVal_t = OGLimit::limitsValue_t;
 namespace
 {
-  OGLimit::OGL_SingleValueLimits GetSingleValueLimits() noexcept;
+  [[nodiscard]] OGLimit::OGL_SingleValueLimits GetSingleValueLimits() noexcept;
   OGLimit::OGL_SingleValueLimits const svLimitsMap{ GetSingleValueLimits() };
 }
 
