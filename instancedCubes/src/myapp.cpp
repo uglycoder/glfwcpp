@@ -1,6 +1,8 @@
 // myapp.cpp
-// Creation date: 2015-03-26 11:25:09 +0000
-// Copyright 2015 Simon Parmenter. All rights reserved.
+
+//  MIT License
+//  See LICENSE.txt file in root of project
+//  Copyright(c) 2018 Simon Parmenter
 
 #include "pch.h"
 

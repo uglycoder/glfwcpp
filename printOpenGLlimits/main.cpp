@@ -1,5 +1,8 @@
 // main.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
+//  MIT License
+//  See LICENSE.txt file in root of project
+//  Copyright(c) 2018 Simon Parmenter
 
 #include "pch.h"
 #include <iostream>
