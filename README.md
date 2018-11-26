@@ -14,7 +14,7 @@ The VS Solution currently comprises 5 projects:
 ### glfwpp
 This is a static library project and is a partial implementation of a C++ wrapper for the [GLFW 3.2.1 library](http://www.glfw.org/)
 and the [OpenGL 4.5 API](https://www.khronos.org/registry/OpenGL-Refpages/gl4/). It will be further developed as needed.  
-Dependencies: [oglLimitsAndSettings]
+Dependencies: [oglLimitsAndSettings]; [glad](https://glad.dav1d.de/); [glm](https://glm.g-truc.net/0.9.9/index.html)
 
 ### instancedCubes
 Uses the [glfwpp] project to demo the instancing of a cube.
