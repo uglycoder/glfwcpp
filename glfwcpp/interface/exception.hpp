@@ -17,7 +17,7 @@ class Exception : public std::runtime_error
   using std::runtime_error::runtime_error;
 
 public:
-  static std::string formatMsg(std::string const & fileName, std::string const & lineNumber, std::string const & msg);
+  static [[nodiscard]] std::string formatMsg(std::string const & fileName, std::string const & lineNumber, std::string const & msg);
 };
 
 } // namespace GLFWPP_ns

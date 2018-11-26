@@ -21,12 +21,12 @@ class VertexBuffer;
 class VAO final
 {
 public:
-  static ::GLuint MaxVertexAttribBindings() noexcept;
-  static ::GLuint MaxVertexAttribs() noexcept;
+  [[nodiscard]] static ::GLuint MaxVertexAttribBindings() noexcept;
+  [[nodiscard]] static ::GLuint MaxVertexAttribs() noexcept;
 
   using listVAO_t = std::vector<VAO>;
   static void CreateListofVAOs(std::size_t num, listVAO_t & list);
-  static listVAO_t CreateListofVAOs(std::size_t num);
+  [[nodiscard]]static listVAO_t CreateListofVAOs(std::size_t num);
 
   static void BreakBinding() noexcept;
 
@@ -41,8 +41,8 @@ public:
   VAO(VAO && rhs)             = default;
   VAO & operator=(VAO && rhs) = default;
 
-  ::GLuint    name()  const noexcept;
-  std::string label() const noexcept;
+  [[nodiscard]] ::GLuint    name()  const noexcept;
+  [[nodiscard]] std::string label() const noexcept;
 
   void label(std::string labelStr) noexcept;
 

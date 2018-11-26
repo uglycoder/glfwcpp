@@ -51,8 +51,8 @@ public:
   void validate() const;
   void use() const;
 
-  ::GLuint getHandle() const noexcept;
-  bool   isLinked()  const noexcept;
+  [[nodiscard]] ::GLuint getHandle() const noexcept;
+  [[nodiscard]] bool   isLinked()  const noexcept;
 
   void bindAttribLocation( ::GLuint location, std::string const & name) const noexcept;
   void bindFragDataLocation( ::GLuint location, std::string const & name ) const noexcept;
@@ -84,15 +84,15 @@ private:
 
   uniformLocationMap_t m_uniformLocations;
 
-  ::GLint getUniformLocation(std::string const & name);
+  [[nodiscard]] ::GLint getUniformLocation(std::string const & name);
 
-  shaderList_t getAttachedShaders() const;
+  [[nodiscard]] shaderList_t getAttachedShaders() const;
 
   void createProgramObject();
 
-  static std::string GetCompilationLog(::GLuint shader);
-  static std::string GetLinkLog(::GLuint program);
-  static bool ValidateProgram(::GLuint program) noexcept;
+  [[nodiscard]] static std::string GetCompilationLog(::GLuint shader);
+  [[nodiscard]] static std::string GetLinkLog(::GLuint program);
+  [[nodiscard]] static bool ValidateProgram(::GLuint program) noexcept;
   static void PrintActiveUniforms(::GLuint program, std::ostream & os);
   static void PrintActiveUniformBlocks(::GLuint program, std::ostream & os);
   static void PrintActiveAttribs(::GLuint program, std::ostream & os);

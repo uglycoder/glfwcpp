@@ -47,16 +47,16 @@ public:
   void setCameraToDefaultPosition() noexcept;
 
   // get/Set world camera position.
-  glm::vec3 const & position() const noexcept;
+  [[nodiscard]] glm::vec3 const & position() const noexcept;
   void position( glm::vec3 const & v) noexcept;
 
   // get camera basis vectors.
-  glm::vec3 const & direction() const noexcept;
-  glm::vec3 const & up()        const noexcept;
-  glm::vec3 const & right()     const noexcept;
+  [[nodiscard]] glm::vec3 const & direction() const noexcept;
+  [[nodiscard]] glm::vec3 const & up()        const noexcept;
+  [[nodiscard]] glm::vec3 const & right()     const noexcept;
 
   // get frustum properties.
-  frustrum_t const & frustrum() const noexcept;
+  [[nodiscard]] frustrum_t const & frustrum() const noexcept;
 
   void projectionMatrix(
     float fovY
@@ -82,12 +82,12 @@ public:
   void rotateAboutRight(float angle) noexcept;  // pitch
 
   // After modifying camera position/orientation, call to rebuild the view matrix.
-  glm::mat4 const & updateViewMatrix() noexcept;
+  [[nodiscard]] glm::mat4 const & updateViewMatrix() noexcept;
 
   // get view/proj matrices.
-  glm::mat4 const & view() const noexcept;
-  glm::mat4 const & proj() const noexcept;
-  glm::mat4 viewProj()     const noexcept;
+  [[nodiscard]] glm::mat4 const & view() const noexcept;
+  [[nodiscard]] glm::mat4 const & proj() const noexcept;
+  [[nodiscard]] glm::mat4 viewProj()     const noexcept;
 
 private:
   // Camera coordinate system with coordinates relative to world space.

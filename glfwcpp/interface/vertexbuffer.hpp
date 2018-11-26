@@ -10,19 +10,18 @@
 namespace GLFWPP_ns
 {
 
+  class VertexBuffer final : public GLBuffer
+  {
+  public:
+    explicit VertexBuffer(std::string const & label);
+    ~VertexBuffer() = default;
 
-class VertexBuffer final : public GLBuffer
-{
-public:
-  explicit VertexBuffer(std::string const & label);
-  ~VertexBuffer() = default;
+    VertexBuffer(VertexBuffer && rhs) = default;
+    VertexBuffer & operator=(VertexBuffer && rhs) = default;
 
-  VertexBuffer(VertexBuffer && rhs)             = default;
-  VertexBuffer & operator=(VertexBuffer && rhs) = default;
-
-  VertexBuffer()                                 = delete;
-  VertexBuffer(VertexBuffer const &)             = delete;
-  VertexBuffer & operator=(VertexBuffer const &) = delete;
-};
+    VertexBuffer() = delete;
+    VertexBuffer(VertexBuffer const &) = delete;
+    VertexBuffer & operator=(VertexBuffer const &) = delete;
+  };
 
 }

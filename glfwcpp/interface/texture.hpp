@@ -9,7 +9,7 @@
 
 namespace GLFWPP_ns
 {
-  enum class OGL_TEXTURE_TARGETS
+  enum class[[nodiscard]] OGL_TEXTURE_TARGETS
   {
     ONE_D                     = GL_TEXTURE_1D
     , TWO_D                   = GL_TEXTURE_2D
@@ -33,8 +33,8 @@ namespace GLFWPP_ns
     TextureBase(TextureBase const &)             = delete;
     TextureBase & operator=(TextureBase const &) = delete;
 
-    ::GLuint    name() const noexcept;
-    std::string label() const noexcept;
+    [[nodiscard]] ::GLuint    name() const noexcept;
+    [[nodiscard]] std::string label() const noexcept;
 
     void label(std::string label) noexcept;
 

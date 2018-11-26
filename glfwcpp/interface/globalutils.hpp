@@ -12,13 +12,13 @@ namespace GlobalUtils_ns
 {
 
 template<typename T, std::size_t N>
-constexpr std::size_t ArraySize(T (&)[N]) noexcept
+[[nodiscard]] constexpr std::size_t ArraySize(T (&)[N]) noexcept
 {
   return N;
 }
 
 template<typename T>
-constexpr auto ToUType(T type) noexcept
+[[nodiscard]] constexpr auto ToUType(T type) noexcept
 {
   return static_cast<std::underlying_type_t<T>>(type);
 }

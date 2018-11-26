@@ -83,7 +83,7 @@ namespace
   }
 }
 
-::GLuint GLFWPP_ns::LoadTexture(std::filesystem::path const & filename, ::GLuint textureName)
+::GLuint GLFWPP_ns::LoadTexture(std::filesystem::path const & filename, ::GLuint textureName [[maybe_unused]])
 {
   namespace fs = std::filesystem;
 

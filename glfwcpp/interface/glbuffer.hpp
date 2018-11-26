@@ -20,8 +20,8 @@ public:
   GLBuffer(GLBuffer const &)             = delete;
   GLBuffer & operator=(GLBuffer const &) = delete;
 
-  ::GLuint    name() const noexcept;
-  std::string label() const noexcept;
+  [[nodiscard]] ::GLuint    name() const noexcept;
+  [[nodiscard]] std::string label() const noexcept;
 
   void label(std::string label) noexcept;
 

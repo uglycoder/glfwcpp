@@ -16,95 +16,95 @@ struct GLFWmonitor;
 
 namespace GLFWPP_ns
 {
-using SetWindowHintsFn = std::function<void()>;
+  using SetWindowHintsFn = std::function<void()>;
 
-struct rectWH
-{
-  int width;
-  int height;
-};
+  struct rectWH
+  {
+    int width;
+    int height;
+  };
 
 
 
-class Window
-{
-public:
-  inline static SetWindowHintsFn SetWindowHints;
-  
-  explicit Window(
+  class Window
+  {
+  public:
+    inline static SetWindowHintsFn SetWindowHints;
+
+    explicit Window(
       int width, int height
-      ,std::string const & title
-      ,SetWindowHintsFn hints);
+      , std::string const & title
+      , SetWindowHintsFn hints);
 
-  explicit Window(
+    explicit Window(
       int width, int height
-      ,std::string const & title
-      ,SetWindowHintsFn hints
-      ,bool makeCntxtCurrent);
+      , std::string const & title
+      , SetWindowHintsFn hints
+      , bool makeCntxtCurrent);
 
-  explicit Window(
+    explicit Window(
       int width, int height
-      ,std::string const & title
-      ,SetWindowHintsFn hints
-      ,bool makeCntxtCurrent
-      ,GLFWmonitor * monitor
-      ,GLFWwindow * share);
-  
-  virtual ~Window();
+      , std::string const & title
+      , SetWindowHintsFn hints
+      , bool makeCntxtCurrent
+      , GLFWmonitor * monitor
+      , GLFWwindow * share);
 
-  Window()                           = default;
-  Window(Window const &)             = delete;
-  Window & operator=(Window const &) = delete;
-  Window(Window&&)                   = default;
-  Window & operator=(Window&&)       = default;
+    virtual ~Window();
+
+    Window() = default;
+    Window(Window const &) = delete;
+    Window & operator=(Window const &) = delete;
+    Window(Window&&) = default;
+    Window & operator=(Window&&) = default;
 
 
-  void createGLFWwindow(
+    void createGLFWwindow(
       int width, int height
-      ,std::string const & title
-      ,SetWindowHintsFn hints
-      ,bool makeCntxtCurrent = true
-      ,GLFWmonitor * monitor = nullptr, GLFWwindow * share = nullptr);
+      , std::string const & title
+      , SetWindowHintsFn hints
+      , bool makeCntxtCurrent = true
+      , GLFWmonitor * monitor = nullptr, GLFWwindow * share = nullptr);
 
-  GLFWwindow * glfwHandle() const noexcept;
+    [[nodiscard]] GLFWwindow * glfwHandle() const noexcept;
 
-  bool shouldClose() const noexcept;
+    [[nodiscard]] bool shouldClose() const noexcept;
 
-  // If an error occurs, all size arguments will be set to zero.
-  rectWH framebufferSize() const  noexcept;
+    // If an error occurs, all size arguments will be set to zero.
+    [[nodiscard]] rectWH framebufferSize() const noexcept;
 
-  void swapBuffers() const noexcept;
+    void swapBuffers() const noexcept;
 
-  void makeContextCurrent() const noexcept;
-  bool isContextCurrent()   const noexcept;
-  contextAttributes getContext() const noexcept;
+    void makeContextCurrent() const noexcept;
+    [[nodiscard]] bool              isContextCurrent() const noexcept;
+    [[nodiscard]] contextAttributes getContext()       const noexcept;
 
-  void loadOGLFunctions();
-  bool openGLFunctionsLoaded() const noexcept;
+    void loadOGLFunctions();
+    [[nodiscard]] bool openGLFunctionsLoaded() const noexcept;
 
-  virtual bool init(){ return true;}
-  virtual void render(double /*currentTime*/){}
-  virtual void shutdown(){}
+    [[nodiscard]] virtual bool init() { return true; }
+    virtual void render(double /*currentTime*/) {}
+    virtual void shutdown() {}
 
-  virtual void registerCallbacks() const noexcept {}
+    virtual void registerCallbacks() const noexcept {}
 
-  // Key input
-  virtual void keyHandler(int /*key*/, int /*scancode*/, int /*action*/, int /*mods*/) noexcept {}
-  static void  KeyCallback(GLFWwindow * window, int key, int scancode, int action, int mods) noexcept;
+    // Key input
+    virtual void keyHandler(int /*key*/, int /*scancode*/, int /*action*/, int /*mods*/) noexcept {}
+    static void  KeyCallback(GLFWwindow * window, int key, int scancode, int action, int mods) noexcept;
 
-  // Frame buffer
-  virtual void frameBufferSizeHandler(int /*width*/, int /*height*/) noexcept {}  // pixels
-  static void FrameBufferSizeCallback(GLFWwindow * window, int width, int height) noexcept;
+    // Frame buffer
+    virtual void frameBufferSizeHandler(int /*width*/, int /*height*/) noexcept {}  // pixels
+    static void FrameBufferSizeCallback(GLFWwindow * window, int width, int height) noexcept;
 
 
-protected:
-  GLFWwindow * m_hWnd{};
+  protected:
+    GLFWwindow * m_hWnd{};
 
-  bool m_OGLFunctionsLoaded{};
+    bool m_OGLFunctionsLoaded{};
 
-};
+  };
 
-Window * GetWindow(GLFWwindow * window) noexcept;
+  [[nodiscard]] Window * GetWindow(GLFWwindow * window) noexcept;
 
 } // namespace GLFWPP_ns
 
