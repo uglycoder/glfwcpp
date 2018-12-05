@@ -152,6 +152,7 @@ public:
     );
 
     auto tex{ GLFWPP_ns::LoadTexture("baboon.ktx", 0) };
+    tex = GLFWPP_ns::LoadTexture("mountaincube.ktx", 0);
 
     return true;
   }

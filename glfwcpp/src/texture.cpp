@@ -60,7 +60,7 @@ namespace
   constexpr uint8_t KTXHDRIDSIZE{ 12 };
   struct [[nodiscard]] ktxFileHeader
   {
-    uint8_t  identifier[KTXHDRIDSIZE];
+    uint8_t  identifier[KTXHDRIDSIZE]{};
     uint32_t endianness;
     uint32_t gltype;
     uint32_t gltypesize;
@@ -160,16 +160,64 @@ namespace
         switch(KTXEndianCheck(hdr.endianness))
         {
         case ENDIAN_CHECK::NO_SWAP:
-          return hdr;
+          break;
         case ENDIAN_CHECK::SWAP:
           SwapBytes(hdr);
-          return hdr;
+          break;
         case ENDIAN_CHECK::BAD_VALUE:
           return std::nullopt;
         }
+        //if(hdr.miplevels == 0) ++hdr.miplevels;
+        return hdr;
       }
     }
     return std::nullopt;
+  }
+
+  GLFWPP_ns::OGL_TEXTURE_TARGETS DetermineTextureType(ktxFileHeader const hdr)
+  {
+    using TG = GLFWPP_ns::OGL_TEXTURE_TARGETS;
+    // Guess target (texture type)
+    if(hdr.pixelheight == 0)
+    {
+      if(hdr.arrayelements == 0)
+      {
+        return TG::ONE_D;
+      }
+      else
+      {
+        return TG::ONE_D_ARRAY;
+      }
+    }
+    else if(hdr.pixeldepth == 0)
+    {
+      if(hdr.arrayelements == 0)
+      {
+        if(hdr.faces == 0)
+        {
+          return TG::TWO_D_ARRAY;
+        }
+        else
+        {
+          return TG::CUBE_MAP;
+        }
+      }
+      else
+      {
+        if(hdr.faces == 0)
+        {
+          return TG::TWO_D_ARRAY;
+        }
+        else
+        {
+          return TG::CUBE_MAP_ARRAY;
+        }
+      }
+    }
+    else
+    {
+      return TG::THREE_D;
+    }
   }
 } // anon namespace
 
@@ -185,6 +233,8 @@ namespace
     if(auto const hdrO{ ProcessKTXHeader(ifs) }; hdrO)
     {
       auto const & hdr{*hdrO};
+
+      auto const & texTarget{DetermineTextureType(hdr)};
 
     }
    
