@@ -32,6 +32,6 @@ Uses the [glfwpp] project to demo a simple texture.
 
 
 ##### Notes
-Version of Visual Studio 2017 Professional: 15.9.2<br/>
+Version of Visual Studio 2017 Professional: 15.9.3<br/>
 [The latest Visual C++ redistributables.](https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads)
 
