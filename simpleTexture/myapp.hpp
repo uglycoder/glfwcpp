@@ -151,6 +151,8 @@ public:
       data.get()
     );
 
+    auto tex{ GLFWPP_ns::LoadTexture("baboon.ktx", 0) };
+
     return true;
   }
 

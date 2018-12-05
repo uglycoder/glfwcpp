@@ -28,6 +28,7 @@
 #include <memory>
 #include <mutex>
 #include <numeric>
+#include <optional>
 #include <random>
 #include <regex>
 #include <set>

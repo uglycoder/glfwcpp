@@ -57,22 +57,23 @@ void GLFWPP_ns::TextureBase::label(std::string label) noexcept
 
 namespace
 {
-  struct ktxFileHeader
+  constexpr uint8_t KTXHDRIDSIZE{ 12 };
+  struct [[nodiscard]] ktxFileHeader
   {
-    unsigned char       identifier[12];
-    unsigned int        endianness;
-    unsigned int        gltype;
-    unsigned int        gltypesize;
-    unsigned int        glformat;
-    unsigned int        glinternalformat;
-    unsigned int        glbaseinternalformat;
-    unsigned int        pixelwidth;
-    unsigned int        pixelheight;
-    unsigned int        pixeldepth;
-    unsigned int        arrayelements;
-    unsigned int        faces;
-    unsigned int        miplevels;
-    unsigned int        keypairbytes;
+    uint8_t  identifier[KTXHDRIDSIZE];
+    uint32_t endianness;
+    uint32_t gltype;
+    uint32_t gltypesize;
+    uint32_t glformat;
+    uint32_t glinternalformat;
+    uint32_t glbaseinternalformat;
+    uint32_t pixelwidth;
+    uint32_t pixelheight;
+    uint32_t pixeldepth;
+    uint32_t arrayelements;
+    uint32_t faces;
+    uint32_t miplevels;
+    uint32_t keypairbytes;
   };
 
   
@@ -81,7 +82,97 @@ namespace
     istrm.read(reinterpret_cast<char*>(&hdr), sizeof hdr);
     return istrm;
   }
-}
+
+  [[nodiscard]] constexpr bool CheckKTXIdentifier( uint8_t const (&id)[KTXHDRIDSIZE])
+  {
+    constexpr uint8_t KTXidentifier[]
+    {
+        0xAB, 0x4B, 0x54, 0x58, 0x20, 0x31, 0x31, 0xBB, 0x0D, 0x0A, 0x1A, 0x0A
+    };
+
+    constexpr std::basic_string_view<uint8_t> ktxId{KTXidentifier, KTXHDRIDSIZE };
+    std::basic_string_view<uint8_t> const svId{id, KTXHDRIDSIZE };
+
+    return ktxId.compare(svId) == 0;
+  }
+
+  enum class [[nodiscard]] ENDIAN_CHECK {NO_SWAP, SWAP, BAD_VALUE};
+
+  constexpr ENDIAN_CHECK KTXEndianCheck(uint32_t value)
+  {
+    switch(value)
+    {
+    case 0x04030201:
+      return ENDIAN_CHECK::NO_SWAP;
+    case 0x01020304:
+      return ENDIAN_CHECK::SWAP;
+    default:
+      return ENDIAN_CHECK::BAD_VALUE;
+    };
+  }
+
+  template< typename T >
+  [[nodiscard]] auto ByteSwap(T val)
+  {
+    static_assert(std::is_integral_v<T>, "T must be an integral type");
+
+    if constexpr(sizeof val == 2)
+    {
+      return _byteswap_ushort(val);
+    }
+    else if constexpr(sizeof val == 4)
+    {
+      return _byteswap_ulong(val);
+    }
+    else if constexpr(sizeof val == 8)
+    {
+      return _byteswap_uint64(val);
+    }
+    else
+    {
+      static_assert(false, "Val must be of a size 2, 4, or 8");
+    }
+  }
+
+  void SwapBytes(ktxFileHeader & hdr)
+  {
+    hdr.endianness           = ByteSwap(hdr.endianness);
+    hdr.gltype               = ByteSwap(hdr.gltype);
+    hdr.gltypesize           = ByteSwap(hdr.gltypesize);
+    hdr.glformat             = ByteSwap(hdr.glformat);
+    hdr.glinternalformat     = ByteSwap(hdr.glinternalformat);
+    hdr.glbaseinternalformat = ByteSwap(hdr.glbaseinternalformat);
+    hdr.pixelwidth           = ByteSwap(hdr.pixelwidth);
+    hdr.pixelheight          = ByteSwap(hdr.pixelheight);
+    hdr.pixeldepth           = ByteSwap(hdr.pixeldepth);
+    hdr.arrayelements        = ByteSwap(hdr.arrayelements);
+    hdr.faces                = ByteSwap(hdr.faces);
+    hdr.miplevels            = ByteSwap(hdr.miplevels);
+    hdr.keypairbytes         = ByteSwap(hdr.keypairbytes);
+  }
+
+  [[nodiscard]] std::optional<ktxFileHeader> ProcessKTXHeader(std::istream & is)
+  {
+    if(ktxFileHeader hdr; is >> hdr)
+    {
+      if(CheckKTXIdentifier(hdr.identifier))
+      {
+        switch(KTXEndianCheck(hdr.endianness))
+        {
+        case ENDIAN_CHECK::NO_SWAP:
+          return hdr;
+        case ENDIAN_CHECK::SWAP:
+          SwapBytes(hdr);
+          return hdr;
+        case ENDIAN_CHECK::BAD_VALUE:
+          return std::nullopt;
+        }
+      }
+    }
+    return std::nullopt;
+  }
+} // anon namespace
+
 
 ::GLuint GLFWPP_ns::LoadTexture(std::filesystem::path const & filename, ::GLuint textureName [[maybe_unused]])
 {
@@ -90,11 +181,13 @@ namespace
   if(fs::exists(filename))
   {
     std::ifstream ifs(filename, std::ios::binary);
-   
-    if(ktxFileHeader hdr; ifs >> hdr)
+
+    if(auto const hdrO{ ProcessKTXHeader(ifs) }; hdrO)
     {
-      return {};
+      auto const & hdr{*hdrO};
+
     }
+   
   }
 
   return {};
