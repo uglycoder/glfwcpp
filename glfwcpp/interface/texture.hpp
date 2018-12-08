@@ -5,6 +5,9 @@
 
 #pragma once
 
+#include <utility>
+#include <variant>
+
 #include "../interface/glheader.h"
 
 namespace GLFWPP_ns
@@ -43,12 +46,13 @@ namespace GLFWPP_ns
 
     ~TextureBase();
 
-    TextureBase(TextureBase && rhs) = default;
-    TextureBase & operator=(TextureBase && rhs) = default;
+    TextureBase(TextureBase && rhs);
+    TextureBase & operator=(TextureBase && rhs) = delete;
 
   private:
     ::GLuint m_name{};
     std::string m_label;
+    bool m_moving{};
   };
 
   
@@ -140,7 +144,26 @@ namespace GLFWPP_ns
 
   };
 
-  ::GLuint LoadTexture(std::filesystem::path const & filename, ::GLuint textureName);
+  using textureVariant = std::variant<
+    Texture<OGL_TEXTURE_TARGETS::ONE_D>
+    ,Texture<OGL_TEXTURE_TARGETS::TWO_D>
+    ,Texture<OGL_TEXTURE_TARGETS::THREE_D>
+    ,Texture<OGL_TEXTURE_TARGETS::ONE_D_ARRAY>
+    ,Texture<OGL_TEXTURE_TARGETS::TWO_D_ARRAY>
+    ,Texture<OGL_TEXTURE_TARGETS::RECTANGLE>
+    ,Texture<OGL_TEXTURE_TARGETS::CUBE_MAP>
+    ,Texture<OGL_TEXTURE_TARGETS::CUBE_MAP_ARRAY>
+    ,Texture<OGL_TEXTURE_TARGETS::BUFFER>
+    ,Texture<OGL_TEXTURE_TARGETS::TWO_D_MULTISAMPLE>
+    ,Texture<OGL_TEXTURE_TARGETS::TWO_D_MULTISAMPLE>
+  >;
 
+  textureVariant LoadTexture(std::filesystem::path const & filename);
+
+  template<OGL_TEXTURE_TARGETS texTarget>
+  auto LoadTexture(std::filesystem::path const & filename)
+  {
+    return std::get<Texture<texTarget>>(LoadTexture(filename));
+  }
 }
 

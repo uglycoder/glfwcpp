@@ -29,12 +29,22 @@ GLFWPP_ns::TextureBase::TextureBase(
   std::cout << "constructor: " << __func__ << std::endl;
 }
 
+GLFWPP_ns::TextureBase::TextureBase(TextureBase && rhs)
+  :
+  m_name{ rhs.m_name }
+  , m_label{ std::move(rhs.m_label) }
+{
+  rhs.m_moving = true;
+}
 
 GLFWPP_ns::TextureBase::~TextureBase()
 {
   assert(::glIsTexture(m_name));
 
-  ::glDeleteTextures(1, &m_name);
+  if(!m_moving)
+  {
+    ::glDeleteTextures(1, &m_name);
+  }
 }
 
 GLuint GLFWPP_ns::TextureBase::name() const noexcept
@@ -222,7 +232,7 @@ namespace
 } // anon namespace
 
 
-::GLuint GLFWPP_ns::LoadTexture(std::filesystem::path const & filename, ::GLuint textureName [[maybe_unused]])
+GLFWPP_ns::textureVariant GLFWPP_ns::LoadTexture(std::filesystem::path const & filename)
 {
   namespace fs = std::filesystem;
 
@@ -234,12 +244,36 @@ namespace
     {
       auto const & hdr{*hdrO};
 
-      auto const & texTarget{DetermineTextureType(hdr)};
+      switch(auto const & texTarget{ DetermineTextureType(hdr) }; texTarget)
+      {
+      case OGL_TEXTURE_TARGETS::ONE_D:
+        break;
+      case OGL_TEXTURE_TARGETS::TWO_D:
+        break;
+      case OGL_TEXTURE_TARGETS::THREE_D:
+        break;
+      case OGL_TEXTURE_TARGETS::ONE_D_ARRAY:
+        break;
+      case OGL_TEXTURE_TARGETS::TWO_D_ARRAY:
+        break;
+      case OGL_TEXTURE_TARGETS::RECTANGLE:
+        break;
+      case OGL_TEXTURE_TARGETS::CUBE_MAP:
+        break;
+      case OGL_TEXTURE_TARGETS::CUBE_MAP_ARRAY:
+        break;
+      case OGL_TEXTURE_TARGETS::BUFFER:
+        break;
+      case OGL_TEXTURE_TARGETS::TWO_D_MULTISAMPLE:
+        break;
+      case OGL_TEXTURE_TARGETS::TWO_D_MULTISAMPLE_ARRAY:
+        break;
+      }
 
     }
    
   }
 
-  return {};
+  return Texture<OGL_TEXTURE_TARGETS::TWO_D>{"2D"};
 }
 
