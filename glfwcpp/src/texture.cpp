@@ -184,7 +184,7 @@ namespace
     return std::nullopt;
   }
 
-  GLFWPP_ns::OGL_TEXTURE_TARGETS DetermineTextureType(ktxFileHeader const hdr)
+  [[nodiscard]] GLFWPP_ns::OGL_TEXTURE_TARGETS DetermineTextureType(ktxFileHeader const hdr)
   {
     using TG = GLFWPP_ns::OGL_TEXTURE_TARGETS;
     // Guess target (texture type)

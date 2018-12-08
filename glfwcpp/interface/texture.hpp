@@ -158,10 +158,10 @@ namespace GLFWPP_ns
     ,Texture<OGL_TEXTURE_TARGETS::TWO_D_MULTISAMPLE>
   >;
 
-  textureVariant LoadTexture(std::filesystem::path const & filename);
+  [[nodiscard]] textureVariant LoadTexture(std::filesystem::path const & filename);
 
   template<OGL_TEXTURE_TARGETS texTarget>
-  auto LoadTexture(std::filesystem::path const & filename)
+  [[nodiscard]] auto LoadTexture(std::filesystem::path const & filename)
   {
     return std::get<Texture<texTarget>>(LoadTexture(filename));
   }
