@@ -178,13 +178,14 @@ namespace
           return std::nullopt;
         }
         //if(hdr.miplevels == 0) ++hdr.miplevels;
+        is.seekg(hdr.keypairbytes, std::ios_base::cur);
         return hdr;
       }
     }
     return std::nullopt;
   }
 
-  [[nodiscard]] GLFWPP_ns::OGL_TEXTURE_TARGETS DetermineTextureType(ktxFileHeader const hdr)
+  [[nodiscard]] GLFWPP_ns::OGL_TEXTURE_TARGETS DetermineTextureType(ktxFileHeader const & hdr)
   {
     using TG = GLFWPP_ns::OGL_TEXTURE_TARGETS;
     // Guess target (texture type)
@@ -238,42 +239,45 @@ GLFWPP_ns::textureVariant GLFWPP_ns::LoadTexture(std::filesystem::path const & f
 
   if(fs::exists(filename))
   {
+    auto const & sizeFile{fs::file_size(filename)};
     std::ifstream ifs(filename, std::ios::binary);
 
     if(auto const hdrO{ ProcessKTXHeader(ifs) }; hdrO)
     {
       auto const & hdr{*hdrO};
+      uint64_t const dataBlockSize{sizeFile - ifs.tellg()};
 
-      switch(auto const & texTarget{ DetermineTextureType(hdr) }; texTarget)
+      auto const & dataPtr{std::make_unique<char[]>(dataBlockSize)};
+      if(ifs.read(dataPtr.get(), dataBlockSize))
       {
-      case OGL_TEXTURE_TARGETS::ONE_D:
-        break;
-      case OGL_TEXTURE_TARGETS::TWO_D:
-        break;
-      case OGL_TEXTURE_TARGETS::THREE_D:
-        break;
-      case OGL_TEXTURE_TARGETS::ONE_D_ARRAY:
-        break;
-      case OGL_TEXTURE_TARGETS::TWO_D_ARRAY:
-        break;
-      case OGL_TEXTURE_TARGETS::RECTANGLE:
-        break;
-      case OGL_TEXTURE_TARGETS::CUBE_MAP:
-        break;
-      case OGL_TEXTURE_TARGETS::CUBE_MAP_ARRAY:
-        break;
-      case OGL_TEXTURE_TARGETS::BUFFER:
-        break;
-      case OGL_TEXTURE_TARGETS::TWO_D_MULTISAMPLE:
-        break;
-      case OGL_TEXTURE_TARGETS::TWO_D_MULTISAMPLE_ARRAY:
-        break;
+        switch(auto const & texTarget{DetermineTextureType(hdr)}; texTarget)
+        {
+        case OGL_TEXTURE_TARGETS::ONE_D:
+          break;
+        case OGL_TEXTURE_TARGETS::TWO_D:
+          //return Load2D(ifs, hdr);
+        case OGL_TEXTURE_TARGETS::THREE_D:
+          break;
+        case OGL_TEXTURE_TARGETS::ONE_D_ARRAY:
+          break;
+        case OGL_TEXTURE_TARGETS::TWO_D_ARRAY:
+          break;
+        case OGL_TEXTURE_TARGETS::RECTANGLE:
+          break;
+        case OGL_TEXTURE_TARGETS::CUBE_MAP:
+          break;
+        case OGL_TEXTURE_TARGETS::CUBE_MAP_ARRAY:
+          break;
+        case OGL_TEXTURE_TARGETS::BUFFER:
+          break;
+        case OGL_TEXTURE_TARGETS::TWO_D_MULTISAMPLE:
+          break;
+        case OGL_TEXTURE_TARGETS::TWO_D_MULTISAMPLE_ARRAY:
+          break;
+        }
       }
-
-    }
-   
+    }   
   }
-
-  return Texture<OGL_TEXTURE_TARGETS::TWO_D>{"2D"};
+  return std::string{};
 }
 

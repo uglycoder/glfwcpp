@@ -156,6 +156,7 @@ namespace GLFWPP_ns
     ,Texture<OGL_TEXTURE_TARGETS::BUFFER>
     ,Texture<OGL_TEXTURE_TARGETS::TWO_D_MULTISAMPLE>
     ,Texture<OGL_TEXTURE_TARGETS::TWO_D_MULTISAMPLE>
+    ,std::string // error type indicator
   >;
 
   [[nodiscard]] textureVariant LoadTexture(std::filesystem::path const & filename);
