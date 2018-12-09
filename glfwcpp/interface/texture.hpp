@@ -25,6 +25,7 @@ namespace GLFWPP_ns
     , BUFFER                  = GL_TEXTURE_BUFFER
     , TWO_D_MULTISAMPLE       = GL_TEXTURE_2D_MULTISAMPLE
     , TWO_D_MULTISAMPLE_ARRAY = GL_TEXTURE_2D_MULTISAMPLE_ARRAY
+    , UNKNOWN
   };
 
   OGL_TEXTURE_TARGETS GetTargetOfTexture(::GLuint name) noexcept;

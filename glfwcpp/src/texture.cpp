@@ -187,17 +187,24 @@ namespace
 
   [[nodiscard]] GLFWPP_ns::OGL_TEXTURE_TARGETS DetermineTextureType(ktxFileHeader const & hdr)
   {
-    using TG = GLFWPP_ns::OGL_TEXTURE_TARGETS;
+    using TT = GLFWPP_ns::OGL_TEXTURE_TARGETS;
+
+    // Sanity check
+    if( (hdr.pixelwidth == 0) ||                                  // Texture has no width???
+      (hdr.pixelheight == 0 && hdr.pixeldepth != 0))              // Texture has depth but no height???
+    {
+      return TT::UNKNOWN;
+    }
     // Guess target (texture type)
     if(hdr.pixelheight == 0)
     {
       if(hdr.arrayelements == 0)
       {
-        return TG::ONE_D;
+        return TT::ONE_D;
       }
       else
       {
-        return TG::ONE_D_ARRAY;
+        return TT::ONE_D_ARRAY;
       }
     }
     else if(hdr.pixeldepth == 0)
@@ -206,28 +213,28 @@ namespace
       {
         if(hdr.faces == 0)
         {
-          return TG::TWO_D_ARRAY;
+          return TT::TWO_D;
         }
         else
         {
-          return TG::CUBE_MAP;
+          return TT::CUBE_MAP;
         }
       }
       else
       {
         if(hdr.faces == 0)
         {
-          return TG::TWO_D_ARRAY;
+          return TT::TWO_D_ARRAY;
         }
         else
         {
-          return TG::CUBE_MAP_ARRAY;
+          return TT::CUBE_MAP_ARRAY;
         }
       }
     }
     else
     {
-      return TG::THREE_D;
+      return TT::THREE_D;
     }
   }
 } // anon namespace
@@ -257,7 +264,7 @@ GLFWPP_ns::textureVariant GLFWPP_ns::LoadTexture(std::filesystem::path const & f
         case OGL_TEXTURE_TARGETS::ONE_D:
           break;
         case OGL_TEXTURE_TARGETS::TWO_D:
-          //return Load2D(ifs, hdr);
+          return Texture<OGL_TEXTURE_TARGETS::TWO_D>{"2D texture"};
         case OGL_TEXTURE_TARGETS::THREE_D:
           break;
         case OGL_TEXTURE_TARGETS::ONE_D_ARRAY:
@@ -276,6 +283,8 @@ GLFWPP_ns::textureVariant GLFWPP_ns::LoadTexture(std::filesystem::path const & f
           break;
         case OGL_TEXTURE_TARGETS::TWO_D_MULTISAMPLE_ARRAY:
           break;
+        case OGL_TEXTURE_TARGETS::UNKNOWN:
+          return std::string{"Could not figure out texture type"};
         }
       }
     }   
