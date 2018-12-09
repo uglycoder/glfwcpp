@@ -36,9 +36,6 @@ public:
       std::string const & title,
       GLFWPP_ns::SetWindowHintsFn hints)
     : Window{width, height, title,hints}
-     ,m_program{"My Shader"}
-    , m_vao{"VAO"}
-    , m_texture{"My 2D texture"}
   {
     //assert(false);
   }
@@ -151,12 +148,6 @@ public:
       data.get()
     );
 
-    // Test load texture from file functionality
-    auto tex2D1{ GLFWPP_ns::LoadTexture<GLFWPP_ns::OGL_TEXTURE_TARGETS::TWO_D>("baboon.ktx") };
-    //tex = GLFWPP_ns::LoadTexture("mountaincube.ktx");
-
-    m_texture.bind();
-
     return true;
   }
 
@@ -165,7 +156,7 @@ public:
 //  }
 
 private:
-  std::unique_ptr<float[]> generate_texture(int width, int height)
+  auto generate_texture(int width, int height) -> std::unique_ptr<float[]>
   {
     auto data{std::make_unique<float[]>(width * height * sizeof(float))};
 
@@ -182,9 +173,9 @@ private:
     return data;
   }
 
-  GLFWPP_ns::GLSLProgram       m_program;
-  GLFWPP_ns::VAO               m_vao;
-  GLFWPP_ns::Texture<GLFWPP_ns::OGL_TEXTURE_TARGETS::TWO_D> m_texture;
+  GLFWPP_ns::GLSLProgram       m_program{"m_program"};
+  GLFWPP_ns::VAO               m_vao{"m_vao"};
+  GLFWPP_ns::Texture<GLFWPP_ns::OGL_TEXTURE_TARGETS::TWO_D> m_texture{"m_texture"};
 };
 
 //////////////////////////////// MyApp /////////////////////////////////////////

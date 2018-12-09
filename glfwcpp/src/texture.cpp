@@ -237,6 +237,41 @@ namespace
       return TT::THREE_D;
     }
   }
+
+  template<GLFWPP_ns::OGL_TEXTURE_TARGETS texTarget>
+  [[nodiscard]] auto CreateTexture(
+    ktxFileHeader const & hdr
+    , std::string const & label
+    , char * dataPtr)
+  {
+    using TT = GLFWPP_ns::OGL_TEXTURE_TARGETS;
+
+    static_assert(texTarget != TT::UNKNOWN);
+
+    GLFWPP_ns::Texture<texTarget> tex{label};
+
+    if constexpr(texTarget == TT::TWO_D)
+    {
+      tex.allocateImmutableStorage(
+        hdr.miplevels
+        , hdr.glinternalformat
+        , hdr.pixelwidth
+        , hdr.pixelheight
+      );
+
+      tex.loadData(
+      0
+      ,0 ,0
+      , hdr.pixelwidth, hdr.pixelheight
+      , hdr.glformat
+      , hdr.gltype
+      , dataPtr);
+    }
+
+
+    return tex;
+  }
+
 } // anon namespace
 
 
@@ -264,7 +299,7 @@ GLFWPP_ns::textureVariant GLFWPP_ns::LoadTexture(std::filesystem::path const & f
         case OGL_TEXTURE_TARGETS::ONE_D:
           break;
         case OGL_TEXTURE_TARGETS::TWO_D:
-          return Texture<OGL_TEXTURE_TARGETS::TWO_D>{"2D texture"};
+          return CreateTexture<OGL_TEXTURE_TARGETS::TWO_D>(hdr, "2D Texture", dataPtr.get());
         case OGL_TEXTURE_TARGETS::THREE_D:
           break;
         case OGL_TEXTURE_TARGETS::ONE_D_ARRAY:
