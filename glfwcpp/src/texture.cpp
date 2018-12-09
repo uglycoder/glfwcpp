@@ -242,12 +242,14 @@ GLFWPP_ns::textureVariant GLFWPP_ns::LoadTexture(std::filesystem::path const & f
     auto const & sizeFile{fs::file_size(filename)};
     std::ifstream ifs(filename, std::ios::binary);
 
-    if(auto const hdrO{ ProcessKTXHeader(ifs) }; hdrO)
+    if(auto const & hdrO{ ProcessKTXHeader(ifs) }; hdrO)
     {
       auto const & hdr{*hdrO};
-      uint64_t const dataBlockSize{sizeFile - ifs.tellg()};
+      auto const & dataBlockSize{sizeFile - ifs.tellg()};
 
-      auto const & dataPtr{std::make_unique<char[]>(dataBlockSize)};
+      assert(dataBlockSize < std::numeric_limits<std::size_t>::max());
+
+      auto const & dataPtr{std::make_unique<char[]>(static_cast<std::size_t>(dataBlockSize))};
       if(ifs.read(dataPtr.get(), dataBlockSize))
       {
         switch(auto const & texTarget{DetermineTextureType(hdr)}; texTarget)
