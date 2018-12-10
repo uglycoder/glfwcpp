@@ -47,7 +47,7 @@ namespace GLFWPP_ns
 
     ~TextureBase();
 
-    TextureBase(TextureBase && rhs);
+    TextureBase(TextureBase && rhs) noexcept;
     TextureBase & operator=(TextureBase && rhs) = delete;
 
   private:

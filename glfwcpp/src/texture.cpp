@@ -29,7 +29,7 @@ GLFWPP_ns::TextureBase::TextureBase(
   std::cout << "constructor: " << __func__ << std::endl;
 }
 
-GLFWPP_ns::TextureBase::TextureBase(TextureBase && rhs)
+GLFWPP_ns::TextureBase::TextureBase(TextureBase && rhs) noexcept
   :
   m_name{ rhs.m_name }
   , m_label{ std::move(rhs.m_label) }
@@ -67,26 +67,26 @@ void GLFWPP_ns::TextureBase::label(std::string label) noexcept
 
 namespace
 {
-  constexpr uint8_t KTXHDRIDSIZE{ 12 };
-  struct [[nodiscard]] ktxFileHeader
+  constexpr uint8_t KTXHDRIDSIZE{12};
+  struct[[nodiscard]] ktxFileHeader
   {
     uint8_t  identifier[KTXHDRIDSIZE]{};
-    uint32_t endianness;
-    uint32_t gltype;
-    uint32_t gltypesize;
-    uint32_t glformat;
-    uint32_t glinternalformat;
-    uint32_t glbaseinternalformat;
-    uint32_t pixelwidth;
-    uint32_t pixelheight;
-    uint32_t pixeldepth;
-    uint32_t arrayelements;
-    uint32_t faces;
-    uint32_t miplevels;
-    uint32_t keypairbytes;
+    uint32_t endianness{};
+    uint32_t gltype{};
+    uint32_t gltypesize{};
+    uint32_t glformat{};
+    uint32_t glinternalformat{};
+    uint32_t glbaseinternalformat{};
+    uint32_t pixelwidth{};
+    uint32_t pixelheight{};
+    uint32_t pixeldepth{};
+    uint32_t arrayelements{};
+    uint32_t faces{};
+    uint32_t miplevels{};
+    uint32_t keypairbytes{};
   };
 
-  
+
   std::istream & operator>>(std::istream & istrm, ktxFileHeader & hdr)
   {
     istrm.read(reinterpret_cast<char*>(&hdr), sizeof hdr);

@@ -158,7 +158,7 @@ public:
 private:
   auto generate_texture(int width, int height) -> std::unique_ptr<float[]>
   {
-    auto data{std::make_unique<float[]>(width * height * sizeof(float))};
+    auto data{std::make_unique<float[]>(sizeof(float) * width * height)};
 
     for(int y{}; y < height; ++y)
     {
