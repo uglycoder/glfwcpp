@@ -29,7 +29,7 @@ GLFWPP_ns::TextureBase::TextureBase(
   std::cout << "constructor: " << __func__ << std::endl;
 }
 
-GLFWPP_ns::TextureBase::TextureBase(TextureBase && rhs)
+GLFWPP_ns::TextureBase::TextureBase(TextureBase && rhs) noexcept
   :
   m_name{ rhs.m_name }
   , m_label{ std::move(rhs.m_label) }
@@ -67,26 +67,26 @@ void GLFWPP_ns::TextureBase::label(std::string label) noexcept
 
 namespace
 {
-  constexpr uint8_t KTXHDRIDSIZE{ 12 };
-  struct [[nodiscard]] ktxFileHeader
+  constexpr uint8_t KTXHDRIDSIZE{12};
+  struct[[nodiscard]] ktxFileHeader
   {
     uint8_t  identifier[KTXHDRIDSIZE]{};
-    uint32_t endianness;
-    uint32_t gltype;
-    uint32_t gltypesize;
-    uint32_t glformat;
-    uint32_t glinternalformat;
-    uint32_t glbaseinternalformat;
-    uint32_t pixelwidth;
-    uint32_t pixelheight;
-    uint32_t pixeldepth;
-    uint32_t arrayelements;
-    uint32_t faces;
-    uint32_t miplevels;
-    uint32_t keypairbytes;
+    uint32_t endianness{};
+    uint32_t gltype{};
+    uint32_t gltypesize{};
+    uint32_t glformat{};
+    uint32_t glinternalformat{};
+    uint32_t glbaseinternalformat{};
+    uint32_t pixelwidth{};
+    uint32_t pixelheight{};
+    uint32_t pixeldepth{};
+    uint32_t arrayelements{};
+    uint32_t faces{};
+    uint32_t miplevels{};
+    uint32_t keypairbytes{};
   };
 
-  
+
   std::istream & operator>>(std::istream & istrm, ktxFileHeader & hdr)
   {
     istrm.read(reinterpret_cast<char*>(&hdr), sizeof hdr);
@@ -178,25 +178,33 @@ namespace
           return std::nullopt;
         }
         //if(hdr.miplevels == 0) ++hdr.miplevels;
+        is.seekg(hdr.keypairbytes, std::ios_base::cur);
         return hdr;
       }
     }
     return std::nullopt;
   }
 
-  GLFWPP_ns::OGL_TEXTURE_TARGETS DetermineTextureType(ktxFileHeader const hdr)
+  [[nodiscard]] GLFWPP_ns::OGL_TEXTURE_TARGETS DetermineTextureType(ktxFileHeader const & hdr)
   {
-    using TG = GLFWPP_ns::OGL_TEXTURE_TARGETS;
+    using TT = GLFWPP_ns::OGL_TEXTURE_TARGETS;
+
+    // Sanity check
+    if( (hdr.pixelwidth == 0) ||                                  // Texture has no width???
+      (hdr.pixelheight == 0 && hdr.pixeldepth != 0))              // Texture has depth but no height???
+    {
+      return TT::UNKNOWN;
+    }
     // Guess target (texture type)
     if(hdr.pixelheight == 0)
     {
       if(hdr.arrayelements == 0)
       {
-        return TG::ONE_D;
+        return TT::ONE_D;
       }
       else
       {
-        return TG::ONE_D_ARRAY;
+        return TT::ONE_D_ARRAY;
       }
     }
     else if(hdr.pixeldepth == 0)
@@ -205,30 +213,65 @@ namespace
       {
         if(hdr.faces == 0)
         {
-          return TG::TWO_D_ARRAY;
+          return TT::TWO_D;
         }
         else
         {
-          return TG::CUBE_MAP;
+          return TT::CUBE_MAP;
         }
       }
       else
       {
         if(hdr.faces == 0)
         {
-          return TG::TWO_D_ARRAY;
+          return TT::TWO_D_ARRAY;
         }
         else
         {
-          return TG::CUBE_MAP_ARRAY;
+          return TT::CUBE_MAP_ARRAY;
         }
       }
     }
     else
     {
-      return TG::THREE_D;
+      return TT::THREE_D;
     }
   }
+
+  template<GLFWPP_ns::OGL_TEXTURE_TARGETS texTarget>
+  [[nodiscard]] auto CreateTexture(
+    ktxFileHeader const & hdr
+    , std::string const & label
+    , char * dataPtr)
+  {
+    using TT = GLFWPP_ns::OGL_TEXTURE_TARGETS;
+
+    static_assert(texTarget != TT::UNKNOWN);
+
+    GLFWPP_ns::Texture<texTarget> tex{label};
+
+    if constexpr(texTarget == TT::TWO_D)
+    {
+      tex.allocateImmutableStorage(
+        hdr.miplevels
+        , hdr.glinternalformat
+        , hdr.pixelwidth
+        , hdr.pixelheight
+      );
+
+      tex.loadData(
+      0
+      ,0 ,0
+      , hdr.pixelwidth, hdr.pixelheight
+      , hdr.glformat
+      , hdr.gltype
+      , dataPtr);
+    }
+
+
+    return tex;
+  }
+
 } // anon namespace
 
 
@@ -238,42 +281,49 @@ GLFWPP_ns::textureVariant GLFWPP_ns::LoadTexture(std::filesystem::path const & f
 
   if(fs::exists(filename))
   {
+    auto const & sizeFile{fs::file_size(filename)};
     std::ifstream ifs(filename, std::ios::binary);
 
-    if(auto const hdrO{ ProcessKTXHeader(ifs) }; hdrO)
+    if(auto const & hdrO{ ProcessKTXHeader(ifs) }; hdrO)
     {
       auto const & hdr{*hdrO};
+      auto const & dataBlockSize{sizeFile - ifs.tellg()};
 
-      switch(auto const & texTarget{ DetermineTextureType(hdr) }; texTarget)
+      assert(dataBlockSize < std::numeric_limits<std::size_t>::max());
+
+      auto const & dataPtr{std::make_unique<char[]>(static_cast<std::size_t>(dataBlockSize))};
+      if(ifs.read(dataPtr.get(), dataBlockSize))
       {
-      case OGL_TEXTURE_TARGETS::ONE_D:
-        break;
-      case OGL_TEXTURE_TARGETS::TWO_D:
-        break;
-      case OGL_TEXTURE_TARGETS::THREE_D:
-        break;
-      case OGL_TEXTURE_TARGETS::ONE_D_ARRAY:
-        break;
-      case OGL_TEXTURE_TARGETS::TWO_D_ARRAY:
-        break;
-      case OGL_TEXTURE_TARGETS::RECTANGLE:
-        break;
-      case OGL_TEXTURE_TARGETS::CUBE_MAP:
-        break;
-      case OGL_TEXTURE_TARGETS::CUBE_MAP_ARRAY:
-        break;
-      case OGL_TEXTURE_TARGETS::BUFFER:
-        break;
-      case OGL_TEXTURE_TARGETS::TWO_D_MULTISAMPLE:
-        break;
-      case OGL_TEXTURE_TARGETS::TWO_D_MULTISAMPLE_ARRAY:
-        break;
+        switch(auto const & texTarget{DetermineTextureType(hdr)}; texTarget)
+        {
+        case OGL_TEXTURE_TARGETS::ONE_D:
+          break;
+        case OGL_TEXTURE_TARGETS::TWO_D:
+          return CreateTexture<OGL_TEXTURE_TARGETS::TWO_D>(hdr, "2D Texture", dataPtr.get());
+        case OGL_TEXTURE_TARGETS::THREE_D:
+          break;
+        case OGL_TEXTURE_TARGETS::ONE_D_ARRAY:
+          break;
+        case OGL_TEXTURE_TARGETS::TWO_D_ARRAY:
+          break;
+        case OGL_TEXTURE_TARGETS::RECTANGLE:
+          break;
+        case OGL_TEXTURE_TARGETS::CUBE_MAP:
+          break;
+        case OGL_TEXTURE_TARGETS::CUBE_MAP_ARRAY:
+          break;
+        case OGL_TEXTURE_TARGETS::BUFFER:
+          break;
+        case OGL_TEXTURE_TARGETS::TWO_D_MULTISAMPLE:
+          break;
+        case OGL_TEXTURE_TARGETS::TWO_D_MULTISAMPLE_ARRAY:
+          break;
+        case OGL_TEXTURE_TARGETS::UNKNOWN:
+          return std::string{"Could not figure out texture type"};
+        }
       }
-
-    }
-   
+    }   
   }
-
-  return Texture<OGL_TEXTURE_TARGETS::TWO_D>{"2D"};
+  return std::string{};
 }
 

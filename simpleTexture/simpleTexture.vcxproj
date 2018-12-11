@@ -90,6 +90,7 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(OutputDir)</OutDir>
     <IntDir>$(InterDir)</IntDir>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>

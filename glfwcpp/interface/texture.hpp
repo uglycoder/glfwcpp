@@ -25,6 +25,7 @@ namespace GLFWPP_ns
     , BUFFER                  = GL_TEXTURE_BUFFER
     , TWO_D_MULTISAMPLE       = GL_TEXTURE_2D_MULTISAMPLE
     , TWO_D_MULTISAMPLE_ARRAY = GL_TEXTURE_2D_MULTISAMPLE_ARRAY
+    , UNKNOWN                 = -1
   };
 
   OGL_TEXTURE_TARGETS GetTargetOfTexture(::GLuint name) noexcept;
@@ -46,7 +47,7 @@ namespace GLFWPP_ns
 
     ~TextureBase();
 
-    TextureBase(TextureBase && rhs);
+    TextureBase(TextureBase && rhs) noexcept;
     TextureBase & operator=(TextureBase && rhs) = delete;
 
   private:
@@ -156,12 +157,13 @@ namespace GLFWPP_ns
     ,Texture<OGL_TEXTURE_TARGETS::BUFFER>
     ,Texture<OGL_TEXTURE_TARGETS::TWO_D_MULTISAMPLE>
     ,Texture<OGL_TEXTURE_TARGETS::TWO_D_MULTISAMPLE>
+    ,std::string // error type indicator
   >;
 
-  textureVariant LoadTexture(std::filesystem::path const & filename);
+  [[nodiscard]] textureVariant LoadTexture(std::filesystem::path const & filename);
 
   template<OGL_TEXTURE_TARGETS texTarget>
-  auto LoadTexture(std::filesystem::path const & filename)
+  [[nodiscard]] auto LoadTexture(std::filesystem::path const & filename)
   {
     return std::get<Texture<texTarget>>(LoadTexture(filename));
   }

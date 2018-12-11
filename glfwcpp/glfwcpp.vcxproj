@@ -154,7 +154,7 @@
     <OutDir>$(OutputDir)</OutDir>
     <IntDir>$(InterDir)</IntDir>
     <TargetName>$(ProjectName)</TargetName>
-    <CodeAnalysisRuleSet>glfwcpp.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
