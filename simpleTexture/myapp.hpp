@@ -151,12 +151,6 @@ public:
       data.get()
     );
 
-    // Test load texture from file functionality
-    auto tex2D1{ GLFWPP_ns::LoadTexture<GLFWPP_ns::OGL_TEXTURE_TARGETS::TWO_D>("baboon.ktx") };
-    //tex = GLFWPP_ns::LoadTexture("mountaincube.ktx");
-
-    m_texture.bind();
-
     return true;
   }
 
