@@ -31,20 +31,23 @@ GLFWPP_ns::TextureBase::TextureBase(
 
 GLFWPP_ns::TextureBase::TextureBase(TextureBase && rhs) noexcept
   :
-  m_name{ rhs.m_name }
-  , m_label{ std::move(rhs.m_label) }
+  m_label{ std::move(rhs.m_label) }
 {
-  rhs.m_moving = true;
+  std::swap(m_name, rhs.m_name);
+}
+
+GLFWPP_ns::TextureBase & GLFWPP_ns::TextureBase::operator=(TextureBase && rhs) noexcept
+{
+  std::swap(m_name,rhs.m_name);
+  m_label = std::move(rhs.m_label);
+  return *this;
 }
 
 GLFWPP_ns::TextureBase::~TextureBase()
 {
-  assert(::glIsTexture(m_name));
+  assert(m_name == 0 || ::glIsTexture(m_name));
 
-  if(!m_moving)
-  {
-    ::glDeleteTextures(1, &m_name);
-  }
+  ::glDeleteTextures(1, &m_name);
 }
 
 GLuint GLFWPP_ns::TextureBase::name() const noexcept
@@ -177,7 +180,7 @@ namespace
         case ENDIAN_CHECK::BAD_VALUE:
           return std::nullopt;
         }
-        //if(hdr.miplevels == 0) ++hdr.miplevels;
+        if(hdr.miplevels == 0) ++hdr.miplevels;
         is.seekg(hdr.keypairbytes, std::ios_base::cur);
         return hdr;
       }
@@ -259,15 +262,62 @@ namespace
         , hdr.pixelheight
       );
 
-      tex.loadData(
-      0
-      ,0 ,0
-      , hdr.pixelwidth, hdr.pixelheight
-      , hdr.glformat
-      , hdr.gltype
-      , dataPtr);
-    }
 
+      auto loadFileData
+      { [&tex, &hdr, height=hdr.pixelheight, width=hdr.pixelwidth, ptr=dataPtr](uint32_t miplevels) mutable
+        {
+          auto calculate_stride{ [&hdr](std::size_t width, std::size_t pad)
+          {
+            std::size_t channels{};
+            switch(hdr.glbaseinternalformat)
+            {
+            case GL_RED:    channels = 1;
+              break;
+            case GL_RG:     channels = 2;
+              break;
+            case GL_BGR:
+              [[fallthrough]];
+            case GL_RGB:    channels = 3;
+              break;
+            case GL_BGRA:
+              [[fallthrough]];
+            case GL_RGBA:   channels = 4;
+              break;
+            }
+
+            std::size_t stride{ hdr.gltypesize * channels * width };
+
+            stride = (stride + (pad - 1)) & ~(pad - 1);
+
+            return stride;
+          }
+        };
+
+          ::glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+
+          for(unsigned int i = 0; i < miplevels; i++)
+          {
+            tex.loadData(
+              i
+              , 0, 0
+              , width, height
+              , hdr.glformat
+              , hdr.gltype
+              , ptr);
+
+            ptr += height * calculate_stride(width, 1);
+            height >>= 1;
+            width >>= 1;
+            if(!height)
+              height = 1;
+            if(!width)
+              width = 1;
+          }
+        }
+      };
+
+      loadFileData(hdr.miplevels);
+    };   
 
     return tex;
   }

@@ -92,36 +92,48 @@ public:
 
     char const * const vs_source
     {
-        "#version 420 core                                                              \n"
-        "                                                                               \n"
-        "void main(void)                                                                \n"
-        "{                                                                              \n"
-        "    const vec4 vertices[] = vec4[](vec4( 0.75, -0.75, 0.5, 1.0),               \n"
-        "                                   vec4(-0.75, -0.75, 0.5, 1.0),               \n"
-        "                                   vec4( 0.75,  0.75, 0.5, 1.0));              \n"
-        "                                                                               \n"
-        "    gl_Position = vertices[gl_VertexID];                                       \n"
-        "}                                                                              \n"
+        "#version 420 core                                                      \n"
+        "                                                                       \n"
+        "out VS_OUT                                                             \n"
+        "{                                                                      \n"
+        "    vec2 tc;                                                           \n"
+        "} vs_out;                                                              \n"
+        "                                                                       \n"
+        "uniform mat4 mvp;                                                      \n"
+        "uniform float offset;                                                  \n"
+        "                                                                       \n"
+        "void main(void)                                                        \n"
+        "{                                                                      \n"
+        "    const vec2[4] position = vec2[4](vec2(-0.5, -0.5),                 \n"
+        "                                     vec2( 0.5, -0.5),                 \n"
+        "                                     vec2(-0.5,  0.5),                 \n"
+        "                                     vec2( 0.5,  0.5));                \n"
+        "    vs_out.tc = (position[gl_VertexID].xy + vec2(offset, 0.5)) * vec2(30.0, 1.0);                  \n"
+        "    gl_Position = mvp * vec4(position[gl_VertexID], 0.0, 1.0);       \n"
+        "}                                                                      \n"
     };
 
     char const * const fs_source
     {
-        "#version 430 core                                                              \n"
-        "                                                                               \n"
-        "uniform sampler2D s;                                                           \n"
-        "                                                                               \n"
-        "out vec4 color;                                                                \n"
-        "                                                                               \n"
-        "void main(void)                                                                \n"
-        "{                                                                              \n"
-        "    color = texture(s, gl_FragCoord.xy / textureSize(s, 0));                   \n"
-        "}                                                                              \n"
+        "#version 420 core                                                      \n"
+        "                                                                       \n"
+        "layout (location = 0) out vec4 color;                                  \n"
+        "                                                                       \n"
+        "in VS_OUT                                                              \n"
+        "{                                                                      \n"
+        "    vec2 tc;                                                           \n"
+        "} fs_in;                                                               \n"
+        "                                                                       \n"
+        "layout (binding = 0) uniform sampler2D tex;                            \n"
+        "                                                                       \n"
+        "void main(void)                                                        \n"
+        "{                                                                      \n"
+        "    color = texture(tex, fs_in.tc);                                    \n"
+        "}                                                                      \n"
     };
+
     m_program.compileShader(GLFWPP_ns::GLSLShaderType::VERTEX, vs_source);
     m_program.compileShader(GLFWPP_ns::GLSLShaderType::FRAGMENT, fs_source);
-//    m_program.compileShader("tcs.tcs");
-//    m_program.compileShader("tes.tes");
-//    m_program.compileShader("geom.gs");
     m_program.link();
 
 //    m_mvLocation   = m_program.getUniformLocation("mv_matrix");
@@ -130,6 +142,14 @@ public:
     m_program.printActiveAttribs(std::cout);
     m_program.printActiveUniforms(std::cout);
     m_program.printActiveUniformBlocks(std::cout);
+
+    m_textureWall    = std::move(GLFWPP_ns::LoadTexture<GLFWPP_ns::OGL_TEXTURE_TARGETS::TWO_D>("brick.ktx"));
+    //m_textureCeiling = std::move(GLFWPP_ns::LoadTexture<GLFWPP_ns::OGL_TEXTURE_TARGETS::TWO_D>("ceiling.ktx"));
+    //m_textureFloor   = std::move(GLFWPP_ns::LoadTexture<GLFWPP_ns::OGL_TEXTURE_TARGETS::TWO_D>("floor.ktx"));
+
+    m_textureWall.label("Wall texture");
+    //m_textureCeiling.label("Ceiling texture");
+    //m_textureFloor.label("Floor texture");
 
     return true;
   }
@@ -141,7 +161,9 @@ public:
 private:
   GLFWPP_ns::GLSLProgram       m_program{"m_program"};
   GLFWPP_ns::VAO               m_vao{"m_vao"};
-  //GLFWPP_ns::Texture<GLFWPP_ns::OGL_TEXTURE_TARGETS::TWO_D> m_texture{"m_texture 2D"};
+  GLFWPP_ns::Texture<GLFWPP_ns::OGL_TEXTURE_TARGETS::TWO_D> m_textureWall{"Wall texture"};
+  //GLFWPP_ns::Texture<GLFWPP_ns::OGL_TEXTURE_TARGETS::TWO_D> m_textureCeiling{ "Ceiling texture" };
+  //GLFWPP_ns::Texture<GLFWPP_ns::OGL_TEXTURE_TARGETS::TWO_D> m_textureFloor{ "Floor texture" };
 };
 
 //////////////////////////////// MyApp /////////////////////////////////////////

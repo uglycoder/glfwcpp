@@ -48,12 +48,11 @@ namespace GLFWPP_ns
     ~TextureBase();
 
     TextureBase(TextureBase && rhs) noexcept;
-    TextureBase & operator=(TextureBase && rhs) = delete;
+    TextureBase & operator=(TextureBase && rhs) noexcept;
 
   private:
     ::GLuint m_name{};
     std::string m_label;
-    bool m_moving{};
   };
 
   
