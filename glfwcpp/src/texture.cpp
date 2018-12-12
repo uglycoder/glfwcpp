@@ -33,21 +33,16 @@ GLFWPP_ns::TextureBase::TextureBase(TextureBase && rhs) noexcept
   :
   m_label{ std::move(rhs.m_label) }
 {
-  std::swap(m_name, rhs.m_name);
+  ::glDeleteTextures(1, &m_name);
+  m_name = std::exchange(rhs.m_name, 0);
 }
 
 GLFWPP_ns::TextureBase & GLFWPP_ns::TextureBase::operator=(TextureBase && rhs) noexcept
 {
-  std::swap(m_name,rhs.m_name);
+  ::glDeleteTextures(1, &m_name);
+  m_name = std::exchange(rhs.m_name, 0);
   m_label = std::move(rhs.m_label);
   return *this;
-}
-
-GLFWPP_ns::TextureBase::~TextureBase()
-{
-  assert(m_name == 0 || ::glIsTexture(m_name));
-
-  ::glDeleteTextures(1, &m_name);
 }
 
 GLuint GLFWPP_ns::TextureBase::name() const noexcept
