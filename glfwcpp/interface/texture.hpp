@@ -45,7 +45,7 @@ namespace GLFWPP_ns
   protected:
     explicit TextureBase(OGL_TEXTURE_TARGETS target, std::string labelstr);
 
-    ~TextureBase() = default;
+    ~TextureBase();
 
     TextureBase(TextureBase && rhs) noexcept;
     TextureBase & operator=(TextureBase && rhs) noexcept;

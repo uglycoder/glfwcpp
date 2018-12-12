@@ -28,6 +28,12 @@ GLFWPP_ns::TextureBase::TextureBase(
 
   std::cout << "constructor: " << __func__ << std::endl;
 }
+GLFWPP_ns::TextureBase::~TextureBase()
+{
+  assert(m_name == 0 || ::glIsTexture(m_name));
+
+  ::glDeleteTextures(1, &m_name);
+}
 
 GLFWPP_ns::TextureBase::TextureBase(TextureBase && rhs) noexcept
   :
