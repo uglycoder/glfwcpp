@@ -37,7 +37,7 @@ int main()
 
   try
   {
-    MyApp app{ new MyWindow{ 640, 480, "Rename me", SetWindowHints } };
+    MyApp app{ new MyWindow{ 640, 480, "Tunnel", SetWindowHints } };
     if(app.init())
     {
       GLFWPP_ns::PrintGLVersionInfo(std::cout);

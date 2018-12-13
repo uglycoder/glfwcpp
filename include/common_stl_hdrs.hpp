@@ -36,6 +36,7 @@
 #include <stdexcept>
 #include <string>
 #include <thread>
+#include <tuple>
 #include <typeindex>
 #include <typeinfo>
 #include <type_traits>

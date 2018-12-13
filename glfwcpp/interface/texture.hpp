@@ -28,6 +28,32 @@ namespace GLFWPP_ns
     , UNKNOWN                 = -1
   };
 
+  class TEXTURE_MIN_FILTER
+  {
+  public:
+    enum class PARAM
+    {
+      NEAREST                  = GL_NEAREST
+      , LINEAR                 = GL_LINEAR
+      , NEAREST_MIPMAP_NEAREST = GL_NEAREST_MIPMAP_NEAREST
+      , LINEAR_MIPMAP_NEAREST  = GL_LINEAR_MIPMAP_NEAREST
+      , NEAREST_MIPMAP_LINEAR  = GL_NEAREST_MIPMAP_LINEAR
+      , LINEAR_MIPMAP_LINEAR   = GL_LINEAR_MIPMAP_LINEAR
+    };
+
+    constexpr explicit TEXTURE_MIN_FILTER(PARAM val) noexcept :  m_value{val} {}
+
+    constexpr operator std::pair<::GLenum, ::GLint>() const noexcept
+    {
+      return std::make_pair(Pname, static_cast<::GLint>(m_value));
+    }
+
+  private:
+    static constexpr ::GLenum Pname{GL_TEXTURE_MIN_FILTER};
+    PARAM m_value;
+
+  };
+
   OGL_TEXTURE_TARGETS GetTargetOfTexture(::GLuint name) noexcept;
 
   class TextureBase
@@ -41,6 +67,12 @@ namespace GLFWPP_ns
     [[nodiscard]] std::string label() const noexcept;
 
     void label(std::string label) noexcept;
+
+    template<typename T>
+    void setParameteri(T v) const noexcept
+    {
+      std::apply(::glTextureParameteri, std::make_tuple(m_name, v.first, v.second));
+    }
 
   protected:
     explicit TextureBase(OGL_TEXTURE_TARGETS target, std::string labelstr);
