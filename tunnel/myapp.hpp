@@ -151,8 +151,10 @@ public:
     //m_textureCeiling.label("Ceiling texture");
     //m_textureFloor.label("Floor texture");
 
-    constexpr std::pair<::GLenum, ::GLint> const TP{GLFWPP_ns::TEXTURE_MIN_FILTER{GLFWPP_ns::TEXTURE_MIN_FILTER::PARAM::LINEAR_MIPMAP_LINEAR}};
-    m_textureWall.setParameteri(TP);
+    constexpr std::pair<::GLenum, ::GLint> TP{GLFWPP_ns::TEXTURE_MIN_FILTER{GLFWPP_ns::TEXTURE_MIN_FILTER::PARAM::LINEAR_MIPMAP_LINEAR}};
+    constexpr std::pair<::GLenum, ::GLint> TP1{GLFWPP_ns::TEXTURE_MAG_FILTER{GLFWPP_ns::TEXTURE_MAG_FILTER::PARAM::LINEAR}};
+    m_textureWall.setParameter(TP);
+    m_textureWall.setParameter(TP1);
 
     return true;
   }

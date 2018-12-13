@@ -51,7 +51,27 @@ namespace GLFWPP_ns
   private:
     static constexpr ::GLenum Pname{GL_TEXTURE_MIN_FILTER};
     PARAM m_value;
+  };
 
+  class TEXTURE_MAG_FILTER
+  {
+  public:
+    enum class PARAM
+    {
+      NEAREST  = GL_NEAREST
+      , LINEAR = GL_LINEAR
+    };
+
+    constexpr explicit TEXTURE_MAG_FILTER(PARAM val) noexcept : m_value{val} {}
+
+    constexpr operator std::pair<::GLenum, ::GLint>() const noexcept
+    {
+      return std::make_pair(Pname, static_cast<::GLint>(m_value));
+    }
+
+  private:
+    static constexpr ::GLenum Pname{GL_TEXTURE_MAG_FILTER};
+    PARAM m_value;
   };
 
   OGL_TEXTURE_TARGETS GetTargetOfTexture(::GLuint name) noexcept;
@@ -69,9 +89,12 @@ namespace GLFWPP_ns
     void label(std::string label) noexcept;
 
     template<typename T>
-    void setParameteri(T v) const noexcept
+    void setParameter(T const & v) const noexcept
     {
-      std::apply(::glTextureParameteri, std::make_tuple(m_name, v.first, v.second));
+      if constexpr(std::is_same_v<typename std::decay<decltype(v)>::type, std::pair<::GLenum, ::GLint>>)
+      {
+        std::apply(::glTextureParameteri, std::make_tuple(m_name, v.first, v.second));
+      }
     }
 
   protected:
