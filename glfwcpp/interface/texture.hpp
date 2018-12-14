@@ -28,6 +28,12 @@ namespace GLFWPP_ns
     , UNKNOWN                 = -1
   };
 
+  struct parameteri
+  {
+    ::GLenum pName;
+    ::GLint  param;
+  };
+
   class TEXTURE_MIN_FILTER
   {
   public:
@@ -43,15 +49,17 @@ namespace GLFWPP_ns
 
     constexpr explicit TEXTURE_MIN_FILTER(PARAM val) noexcept :  m_value{val} {}
 
-    constexpr operator std::pair<::GLenum, ::GLint>() const noexcept
+    constexpr operator parameteri() const noexcept
     {
-      return std::make_pair(Pname, static_cast<::GLint>(m_value));
+      return {Pname, static_cast<::GLint>(m_value)};
     }
 
   private:
     static constexpr ::GLenum Pname{GL_TEXTURE_MIN_FILTER};
     PARAM m_value;
   };
+
+  constexpr parameteri TEXMINFIL_LINMPLIN = TEXTURE_MIN_FILTER{TEXTURE_MIN_FILTER::PARAM::LINEAR_MIPMAP_LINEAR};
 
   class TEXTURE_MAG_FILTER
   {
@@ -64,15 +72,18 @@ namespace GLFWPP_ns
 
     constexpr explicit TEXTURE_MAG_FILTER(PARAM val) noexcept : m_value{val} {}
 
-    constexpr operator std::pair<::GLenum, ::GLint>() const noexcept
+    constexpr operator parameteri() const noexcept
     {
-      return std::make_pair(Pname, static_cast<::GLint>(m_value));
+      return {Pname, static_cast<::GLint>(m_value)};
     }
 
   private:
     static constexpr ::GLenum Pname{GL_TEXTURE_MAG_FILTER};
     PARAM m_value;
   };
+
+  constexpr parameteri TEXMAGFIL_LINEAR = TEXTURE_MAG_FILTER{TEXTURE_MAG_FILTER::PARAM::LINEAR};
+
 
   OGL_TEXTURE_TARGETS GetTargetOfTexture(::GLuint name) noexcept;
 
@@ -91,9 +102,9 @@ namespace GLFWPP_ns
     template<typename T>
     void setParameter(T const & v) const noexcept
     {
-      if constexpr(std::is_same_v<typename std::decay<decltype(v)>::type, std::pair<::GLenum, ::GLint>>)
+      if constexpr(std::is_same_v<std::decay_t<decltype(v)>,parameteri>)
       {
-        std::apply(::glTextureParameteri, std::make_tuple(m_name, v.first, v.second));
+        ::glTextureParameteri(m_name, v.pName, v.param);
       }
     }
 
