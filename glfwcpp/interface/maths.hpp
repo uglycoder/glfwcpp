@@ -22,5 +22,18 @@ template<typename T>[[nodiscard]] constexpr T PI_times(T N)
   static_assert (std::is_arithmetic_v<T>, "");
   return PI<T> * N;
 }
+
+template<typename T>
+constexpr auto ToRadians(T v)
+{
+  return v * 180 / PI<T>;
+}
+
+template<typename T>
+constexpr auto ToDegrees(T v)
+{
+  return v * PI<T> / 180;
+}
+
 }
 }

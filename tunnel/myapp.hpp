@@ -60,7 +60,7 @@ public:
     ::glViewport(0, 0, width, height);
 
     auto const & aspect = (float)width / (float)height;
-    m_projMatrix = glm::perspective(1.0472f, aspect, 0.1f, 100.0f);
+    m_projMatrix = glm::perspective(GLFWPP_ns::Maths_ns::ToDegrees(60.0f), aspect, 0.1f, 100.0f);
   }
 
   ////////////////////////// RENDER ////////////////////////////////////////////
