@@ -59,8 +59,8 @@ public:
   {
     ::glViewport(0, 0, width, height);
 
-    m_aspect = (float)width / (float)height;
-    m_projMatrix = glm::perspective(50.0f, m_aspect, 0.1f, 1000.0f);
+    auto const & aspect = (float)width / (float)height;
+    m_projMatrix = glm::perspective(1.0472f, aspect, 0.1f, 100.0f);
   }
 
   ////////////////////////// RENDER ////////////////////////////////////////////
@@ -79,16 +79,16 @@ public:
 
     for(std::size_t i{}; i < textures.size(); ++i)
     {
-      auto const & rotate1 = glm::rotate(glm::mat4(1.0f), GLFWPP_ns::Maths_ns::PIdiv2<float> * i, glm::vec3(0.0f, 0.0f, 1.0f));
+      auto const & rotate1   = glm::rotate(glm::mat4(1.0f), GLFWPP_ns::Maths_ns::PIdiv2<float> * i, glm::vec3(0.0f, 0.0f, 1.0f));
       auto const & translate = glm::translate(rotate1, glm::vec3(-0.5f, 0.0f, -10.0f));
-      auto const & rotate2 = glm::rotate(translate, GLFWPP_ns::Maths_ns::PIdiv2<float>, glm::vec3(0.0f, 1.0f, 0.0f));
+      auto const & rotate2   = glm::rotate(translate, GLFWPP_ns::Maths_ns::PIdiv2<float>, glm::vec3(0.0f, 1.0f, 0.0f));
       auto const & mv_matrix = glm::scale(rotate2, glm::vec3(30.0f, 1.0f, 1.0f));
       auto const & mvp = m_projMatrix * mv_matrix;
 
       m_program.setUniform("mvp", mvp);
       textures[i]->bind();
 
-      glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+      ::glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     }
 
     swapBuffers();
@@ -182,8 +182,6 @@ private:
   GLFWPP_ns::Texture<GLFWPP_ns::OGL_TEXTURE_TARGETS::TWO_D> m_textureWall{"Wall texture"};
   GLFWPP_ns::Texture<GLFWPP_ns::OGL_TEXTURE_TARGETS::TWO_D> m_textureCeiling{ "Ceiling texture" };
   GLFWPP_ns::Texture<GLFWPP_ns::OGL_TEXTURE_TARGETS::TWO_D> m_textureFloor{ "Floor texture" };
-
-  float m_aspect{};
 
   glm::mat4 m_projMatrix;
 };
