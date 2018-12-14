@@ -30,6 +30,8 @@ This is a simple console program to print out the values captured by [oglLimitsA
 ### simpleTexture
 Uses the [glfwpp] project to demo a simple texture.
 
+### tunnel
+Uses the [glfwpp] project to demo loading textures from a KTX file, texture parameters and mipmaps.
 
 ##### Notes
 Version of Visual Studio 2017 Professional: 15.9.4<br/>
