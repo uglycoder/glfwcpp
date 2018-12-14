@@ -225,12 +225,17 @@ namespace GLFWPP_ns
     ,std::string // error type indicator
   >;
 
-  [[nodiscard]] textureVariant LoadTexture(std::filesystem::path const & filename);
+  [[nodiscard]] textureVariant LoadTexture(
+    std::filesystem::path const & filename
+    , std::string const & objLabel
+  );
 
   template<OGL_TEXTURE_TARGETS texTarget>
-  [[nodiscard]] auto LoadTexture(std::filesystem::path const & filename)
+  [[nodiscard]] auto LoadTexture(
+    std::filesystem::path const & filename
+    , std::string const & objLabel)
   {
-    return std::get<Texture<texTarget>>(LoadTexture(filename));
+    return std::get<Texture<texTarget>>(LoadTexture(filename, objLabel));
   }
 }
 

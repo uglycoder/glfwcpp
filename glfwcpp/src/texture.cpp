@@ -326,7 +326,10 @@ namespace
 } // anon namespace
 
 
-GLFWPP_ns::textureVariant GLFWPP_ns::LoadTexture(std::filesystem::path const & filename)
+GLFWPP_ns::textureVariant GLFWPP_ns::LoadTexture(
+  std::filesystem::path const & filename
+  , std::string const & objLabel
+)
 {
   namespace fs = std::filesystem;
 
@@ -350,7 +353,7 @@ GLFWPP_ns::textureVariant GLFWPP_ns::LoadTexture(std::filesystem::path const & f
         case OGL_TEXTURE_TARGETS::ONE_D:
           break;
         case OGL_TEXTURE_TARGETS::TWO_D:
-          return CreateTexture<OGL_TEXTURE_TARGETS::TWO_D>(hdr, "2D Texture", dataPtr.get());
+          return CreateTexture<OGL_TEXTURE_TARGETS::TWO_D>(hdr, objLabel, dataPtr.get());
         case OGL_TEXTURE_TARGETS::THREE_D:
           break;
         case OGL_TEXTURE_TARGETS::ONE_D_ARRAY:
