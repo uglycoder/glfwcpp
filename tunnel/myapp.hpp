@@ -26,6 +26,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #pragma warning (pop)
 
+#include "../interface/maths.hpp"
 
 class MyWindow : public GLFWPP_ns::Window
 {
@@ -37,7 +38,7 @@ public:
       GLFWPP_ns::SetWindowHintsFn hints)
     : Window{width, height, title,hints}
   {
-    //assert(false);
+    frameBufferSizeHandler(width, height);
   }
 
   void registerCallbacks() const noexcept override
@@ -56,22 +57,39 @@ public:
 
   void frameBufferSizeHandler(int width, int height) noexcept override
   {
-    glViewport(0, 0, width, height);
+    ::glViewport(0, 0, width, height);
+
+    m_aspect = (float)width / (float)height;
+    m_projMatrix = glm::perspective(50.0f, m_aspect, 0.1f, 1000.0f);
   }
 
   ////////////////////////// RENDER ////////////////////////////////////////////
 
   void render([[maybe_unused]] double currentTime) override
   {
-    static const GLfloat green[] = { 0.0f, 0.25f, 0.0f, 1.0f };
-    static const GLfloat one = 1.0f;
+    static const GLfloat black[]{ 0.0f, 0.0f, 0.0f, 0.0f };
 
-    glClearBufferfv(GL_COLOR, 0, green);
-    glClearBufferfv(GL_DEPTH, 0, &one);
+    ::glClearBufferfv(GL_COLOR, 0, black);
 
     m_program.use();
 
-    glDrawArrays(GL_TRIANGLES, 0, 3);
+    m_program.setUniform("offset", (float)currentTime * 0.0003f);
+
+    static std::array<decltype(m_textureCeiling)*, 4> const textures{&m_textureWall, &m_textureFloor, &m_textureWall, &m_textureCeiling};
+
+    for(std::size_t i{}; i < textures.size(); ++i)
+    {
+      auto const & rotate1 = glm::rotate(glm::mat4(1.0f), GLFWPP_ns::Maths_ns::PIdiv2<float> * i, glm::vec3(0.0f, 0.0f, 1.0f));
+      auto const & translate = glm::translate(rotate1, glm::vec3(-0.5f, 0.0f, -10.0f));
+      auto const & rotate2 = glm::rotate(translate, GLFWPP_ns::Maths_ns::PIdiv2<float>, glm::vec3(0.0f, 1.0f, 0.0f));
+      auto const & mv_matrix = glm::scale(rotate2, glm::vec3(30.0f, 1.0f, 1.0f));
+      auto const & mvp = m_projMatrix * mv_matrix;
+
+      m_program.setUniform("mvp", mvp);
+      textures[i]->bind();
+
+      glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    }
 
     swapBuffers();
   }
@@ -136,23 +154,20 @@ public:
     m_program.compileShader(GLFWPP_ns::GLSLShaderType::FRAGMENT, fs_source);
     m_program.link();
 
-//    m_mvLocation   = m_program.getUniformLocation("mv_matrix");
-//    m_projLocation = m_program.getUniformLocation("proj_matrix");
-
     m_program.printActiveAttribs(std::cout);
     m_program.printActiveUniforms(std::cout);
     m_program.printActiveUniformBlocks(std::cout);
 
-    m_textureWall    = std::move(GLFWPP_ns::LoadTexture<GLFWPP_ns::OGL_TEXTURE_TARGETS::TWO_D>("brick.ktx"));
-    //m_textureCeiling = std::move(GLFWPP_ns::LoadTexture<GLFWPP_ns::OGL_TEXTURE_TARGETS::TWO_D>("ceiling.ktx"));
-    //m_textureFloor   = std::move(GLFWPP_ns::LoadTexture<GLFWPP_ns::OGL_TEXTURE_TARGETS::TWO_D>("floor.ktx"));
-
-    m_textureWall.label("Wall texture");
-    //m_textureCeiling.label("Ceiling texture");
-    //m_textureFloor.label("Floor texture");
+    m_textureWall    = std::move(GLFWPP_ns::LoadTexture<GLFWPP_ns::OGL_TEXTURE_TARGETS::TWO_D>("brick.ktx", "Wall texture"));
+    m_textureCeiling = std::move(GLFWPP_ns::LoadTexture<GLFWPP_ns::OGL_TEXTURE_TARGETS::TWO_D>("ceiling.ktx", "Ceiling texture"));
+    m_textureFloor   = std::move(GLFWPP_ns::LoadTexture<GLFWPP_ns::OGL_TEXTURE_TARGETS::TWO_D>("floor.ktx", "Floor texture"));
 
     m_textureWall.setParameter(GLFWPP_ns::TEXMINFIL_LINMPLIN);
     m_textureWall.setParameter(GLFWPP_ns::TEXMAGFIL_LINEAR);
+    m_textureCeiling.setParameter(GLFWPP_ns::TEXMINFIL_LINMPLIN);
+    m_textureCeiling.setParameter(GLFWPP_ns::TEXMAGFIL_LINEAR);
+    m_textureFloor.setParameter(GLFWPP_ns::TEXMINFIL_LINMPLIN);
+    m_textureFloor.setParameter(GLFWPP_ns::TEXMAGFIL_LINEAR);
 
     return true;
   }
@@ -165,8 +180,12 @@ private:
   GLFWPP_ns::GLSLProgram       m_program{"m_program"};
   GLFWPP_ns::VAO               m_vao{"m_vao"};
   GLFWPP_ns::Texture<GLFWPP_ns::OGL_TEXTURE_TARGETS::TWO_D> m_textureWall{"Wall texture"};
-  //GLFWPP_ns::Texture<GLFWPP_ns::OGL_TEXTURE_TARGETS::TWO_D> m_textureCeiling{ "Ceiling texture" };
-  //GLFWPP_ns::Texture<GLFWPP_ns::OGL_TEXTURE_TARGETS::TWO_D> m_textureFloor{ "Floor texture" };
+  GLFWPP_ns::Texture<GLFWPP_ns::OGL_TEXTURE_TARGETS::TWO_D> m_textureCeiling{ "Ceiling texture" };
+  GLFWPP_ns::Texture<GLFWPP_ns::OGL_TEXTURE_TARGETS::TWO_D> m_textureFloor{ "Floor texture" };
+
+  float m_aspect{};
+
+  glm::mat4 m_projMatrix;
 };
 
 //////////////////////////////// MyApp /////////////////////////////////////////
