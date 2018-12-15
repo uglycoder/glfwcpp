@@ -158,9 +158,9 @@ public:
     m_program.printActiveUniforms(std::cout);
     m_program.printActiveUniformBlocks(std::cout);
 
-    m_textureWall    = std::move(GLFWPP_ns::LoadTexture<GLFWPP_ns::OGL_TEXTURE_TARGETS::TWO_D>("brick.ktx", "Wall texture"));
-    m_textureCeiling = std::move(GLFWPP_ns::LoadTexture<GLFWPP_ns::OGL_TEXTURE_TARGETS::TWO_D>("ceiling.ktx", "Ceiling texture"));
-    m_textureFloor   = std::move(GLFWPP_ns::LoadTexture<GLFWPP_ns::OGL_TEXTURE_TARGETS::TWO_D>("floor.ktx", "Floor texture"));
+    m_textureWall    = std::move(GLFWPP_ns::LoadTexture<GLFWPP_ns::OGL_TEXTURE_TARGETS::TWO_D>("brick.ktx", m_textureWall.label()));
+    m_textureCeiling = std::move(GLFWPP_ns::LoadTexture<GLFWPP_ns::OGL_TEXTURE_TARGETS::TWO_D>("ceiling.ktx", m_textureCeiling.label()));
+    m_textureFloor   = std::move(GLFWPP_ns::LoadTexture<GLFWPP_ns::OGL_TEXTURE_TARGETS::TWO_D>("floor.ktx", m_textureFloor.label()));
 
     m_textureWall.setParameter(GLFWPP_ns::TEXMINFIL_LINMPLIN);
     m_textureWall.setParameter(GLFWPP_ns::TEXMAGFIL_LINEAR);
