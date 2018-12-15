@@ -5,6 +5,7 @@
 
 #pragma once
 
+#include <string>
 #include <utility>
 #include <variant>
 
@@ -28,62 +29,15 @@ namespace GLFWPP_ns
     , UNKNOWN                 = -1
   };
 
-  struct parameteri
+  
+  struct textureParameteri
   {
     ::GLenum pName;
     ::GLint  param;
   };
-
-  class TEXTURE_MIN_FILTER
-  {
-  public:
-    enum class PARAM
-    {
-      NEAREST                  = GL_NEAREST
-      , LINEAR                 = GL_LINEAR
-      , NEAREST_MIPMAP_NEAREST = GL_NEAREST_MIPMAP_NEAREST
-      , LINEAR_MIPMAP_NEAREST  = GL_LINEAR_MIPMAP_NEAREST
-      , NEAREST_MIPMAP_LINEAR  = GL_NEAREST_MIPMAP_LINEAR
-      , LINEAR_MIPMAP_LINEAR   = GL_LINEAR_MIPMAP_LINEAR
-    };
-
-    constexpr explicit TEXTURE_MIN_FILTER(PARAM val) noexcept :  m_value{val} {}
-
-    constexpr operator parameteri() const noexcept
-    {
-      return {Pname, static_cast<::GLint>(m_value)};
-    }
-
-  private:
-    static constexpr ::GLenum Pname{GL_TEXTURE_MIN_FILTER};
-    PARAM m_value;
-  };
-
-  constexpr parameteri TEXMINFIL_LINMPLIN = TEXTURE_MIN_FILTER{TEXTURE_MIN_FILTER::PARAM::LINEAR_MIPMAP_LINEAR};
-
-  class TEXTURE_MAG_FILTER
-  {
-  public:
-    enum class PARAM
-    {
-      NEAREST  = GL_NEAREST
-      , LINEAR = GL_LINEAR
-    };
-
-    constexpr explicit TEXTURE_MAG_FILTER(PARAM val) noexcept : m_value{val} {}
-
-    constexpr operator parameteri() const noexcept
-    {
-      return {Pname, static_cast<::GLint>(m_value)};
-    }
-
-  private:
-    static constexpr ::GLenum Pname{GL_TEXTURE_MAG_FILTER};
-    PARAM m_value;
-  };
-
-  constexpr parameteri TEXMAGFIL_LINEAR = TEXTURE_MAG_FILTER{TEXTURE_MAG_FILTER::PARAM::LINEAR};
-
+  
+  constexpr textureParameteri TEXMINFIL_LINMPLIN = {GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR};
+  constexpr textureParameteri TEXMAGFIL_LINEAR   = {GL_TEXTURE_MAG_FILTER, GL_LINEAR};
 
   OGL_TEXTURE_TARGETS GetTargetOfTexture(::GLuint name) noexcept;
 
@@ -102,7 +56,7 @@ namespace GLFWPP_ns
     template<typename T>
     void setParameter(T const & v) const noexcept
     {
-      if constexpr(std::is_same_v<std::decay_t<decltype(v)>,parameteri>)
+      if constexpr(std::is_same_v<std::decay_t<decltype(v)>, textureParameteri>)
       {
         ::glTextureParameteri(m_name, v.pName, v.param);
       }
