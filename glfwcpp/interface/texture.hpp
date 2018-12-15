@@ -35,9 +35,35 @@ namespace GLFWPP_ns
     ::GLenum pName;
     ::GLint  param;
   };
-  
-  constexpr textureParameteri TEXMINFIL_LINMPLIN = {GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR};
-  constexpr textureParameteri TEXMAGFIL_LINEAR   = {GL_TEXTURE_MAG_FILTER, GL_LINEAR};
+
+  constexpr textureParameteri TEXTUREBASELEVEL(::GLint val) noexcept
+  {
+    return {GL_TEXTURE_BASE_LEVEL, val };
+  }
+
+  constexpr textureParameteri TEXTUREMAXLEVEL(::GLint val) noexcept
+  {
+    return { GL_TEXTURE_MAX_LEVEL, val };
+  }
+
+  constexpr textureParameteri TEXCOMPFUNC_LEQUAL   = { GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL};
+  constexpr textureParameteri TEXCOMPFUNC_GEQUAL   = { GL_TEXTURE_COMPARE_FUNC, GL_GEQUAL};
+  constexpr textureParameteri TEXCOMPFUNC_LESS     = { GL_TEXTURE_COMPARE_FUNC, GL_LESS};
+  constexpr textureParameteri TEXCOMPFUNC_GREATER  = { GL_TEXTURE_COMPARE_FUNC, GL_GREATER};
+  constexpr textureParameteri TEXCOMPFUNC_EQUAL    = { GL_TEXTURE_COMPARE_FUNC, GL_EQUAL};
+  constexpr textureParameteri TEXCOMPFUNC_NOTEQUAL = { GL_TEXTURE_COMPARE_FUNC, GL_NOTEQUAL};
+  constexpr textureParameteri TEXCOMPFUNC_ALWAYS   = { GL_TEXTURE_COMPARE_FUNC, GL_ALWAYS};
+  constexpr textureParameteri TEXCOMPFUNC_NEVER    = { GL_TEXTURE_COMPARE_FUNC, GL_NEVER };
+
+  constexpr textureParameteri TEXMINFIL_NEAREST    = { GL_TEXTURE_MIN_FILTER, GL_NEAREST};
+  constexpr textureParameteri TEXMINFIL_LINEAR     = { GL_TEXTURE_MIN_FILTER, GL_LINEAR };
+  constexpr textureParameteri TEXMINFIL_NEARMPNEAR = { GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST };
+  constexpr textureParameteri TEXMINFIL_LINMPLNEAR = { GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST };
+  constexpr textureParameteri TEXMINFIL_NEARMPLIN  = { GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_LINEAR };
+  constexpr textureParameteri TEXMINFIL_LINMPLIN   = { GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR };
+
+  constexpr textureParameteri TEXMAGFIL_NEAREST   = { GL_TEXTURE_MAG_FILTER, GL_NEAREST};
+  constexpr textureParameteri TEXMAGFIL_LINEAR    = { GL_TEXTURE_MAG_FILTER, GL_LINEAR };
 
   OGL_TEXTURE_TARGETS GetTargetOfTexture(::GLuint name) noexcept;
 
