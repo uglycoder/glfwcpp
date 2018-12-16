@@ -218,21 +218,25 @@ bool GLFWPP_ns::GLSLProgram::isLinked() const noexcept
 
 void GLFWPP_ns::GLSLProgram::bindAttribLocation( ::GLuint location, std::string const & name) const noexcept
 {
+  assert(::glIsProgram(m_program) == GL_TRUE);
   ::glBindAttribLocation(m_program, location, name.c_str());
 }
 
 void GLFWPP_ns::GLSLProgram::bindFragDataLocation( ::GLuint location, std::string const & name ) const noexcept
 {
+  assert(::glIsProgram(m_program) == GL_TRUE);
   ::glBindFragDataLocation(m_program, location, name.c_str());
 }
 
 void GLFWPP_ns::GLSLProgram::setUniform( std::string const & name, float x, float y, float z)
 {
+  assert(::glIsProgram(m_program) == GL_TRUE);
   ::glProgramUniform3f(m_program,  getUniformLocation(name), x, y, z);
 }
 
 void GLFWPP_ns::GLSLProgram::setUniform( std::string const & name, glm::vec2 const & v)
 {
+  assert(::glIsProgram(m_program) == GL_TRUE);
   ::glProgramUniform2f(m_program, getUniformLocation(name),v.x,v.y);
 }
 
@@ -243,41 +247,49 @@ void GLFWPP_ns::GLSLProgram::setUniform( std::string const & name, glm::vec3 con
 
 void GLFWPP_ns::GLSLProgram::setUniform( std::string const & name, glm::vec4 const & v)
 {
+  assert(::glIsProgram(m_program) == GL_TRUE);
   ::glProgramUniform4f(m_program, getUniformLocation(name),v.x,v.y,v.z,v.w);
 }
 
 void GLFWPP_ns::GLSLProgram::setUniform( std::string const & name, glm::mat4 const & m)
 {
+  assert(::glIsProgram(m_program) == GL_TRUE);
   ::glProgramUniformMatrix4fv(m_program, getUniformLocation(name), 1, GL_FALSE, &m[0][0]);
 }
 
 void GLFWPP_ns::GLSLProgram::setUniform(std::string const & name, std::vector<glm::mat4> const & m)
 {
+  assert(::glIsProgram(m_program) == GL_TRUE);
   ::glProgramUniformMatrix4fv(m_program, getUniformLocation(name), static_cast<GLsizei>(m.size()), GL_FALSE, reinterpret_cast<const float*>(m.data()));
 }
 
 void GLFWPP_ns::GLSLProgram::setUniform( std::string const & name, glm::mat3 const & m)
 {
+  assert(::glIsProgram(m_program) == GL_TRUE);
   ::glProgramUniformMatrix3fv(m_program, getUniformLocation(name), 1, GL_FALSE, &m[0][0]);
 }
 
 void GLFWPP_ns::GLSLProgram::setUniform( std::string const & name, float val )
 {
+  assert(::glIsProgram(m_program) == GL_TRUE);
   ::glProgramUniform1f(m_program, getUniformLocation(name), val);
 }
 
 void GLFWPP_ns::GLSLProgram::setUniform( std::string const & name, int val )
 {
+  assert(::glIsProgram(m_program) == GL_TRUE);
   ::glProgramUniform1i(m_program, getUniformLocation(name), val);
 }
 
 void GLFWPP_ns::GLSLProgram::setUniform( std::string const & name, bool val )
 {
+  assert(::glIsProgram(m_program) == GL_TRUE);
   ::glProgramUniform1i(m_program, getUniformLocation(name), val);
 }
 
 void GLFWPP_ns::GLSLProgram::setUniform( std::string const & name, ::GLuint val )
 {
+  assert(::glIsProgram(m_program) == GL_TRUE);
   ::glProgramUniform1ui(m_program, getUniformLocation(name), val);
 }
 ////////////////////////////////////////////////////////////////////////////////
@@ -369,14 +381,7 @@ void GLFWPP_ns::GLSLProgram::createProgramObject()
       throw Exception{msg};
     }
 
-    if(!m_name.empty())
-    {
-      ::glObjectLabel(GL_PROGRAM, m_program, -1, m_name.c_str());
-    }
-    else
-    {
-      ::glObjectLabel(GL_PROGRAM, m_program, 0, nullptr);
-    }
+    LabelObject(OGL_LABEL_NAMESPACE::PROGRAM, m_program, m_name);
   }
 }
 
