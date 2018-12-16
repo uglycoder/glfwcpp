@@ -71,9 +71,9 @@ public:
 
     ::glClearBufferfv(GL_COLOR, 0, black);
 
-    m_program.use();
-
     m_program.setUniform("offset", (float)currentTime * 0.0003f);
+
+    m_program.use();
 
     static std::array<decltype(m_textureCeiling)*, 4> const textures{&m_textureWall, &m_textureFloor, &m_textureWall, &m_textureCeiling};
 

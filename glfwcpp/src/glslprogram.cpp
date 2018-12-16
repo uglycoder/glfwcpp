@@ -228,12 +228,12 @@ void GLFWPP_ns::GLSLProgram::bindFragDataLocation( ::GLuint location, std::strin
 
 void GLFWPP_ns::GLSLProgram::setUniform( std::string const & name, float x, float y, float z)
 {
-  ::glUniform3f(getUniformLocation(name),x,y,z);
+  ::glProgramUniform3f(m_program,  getUniformLocation(name), x, y, z);
 }
 
 void GLFWPP_ns::GLSLProgram::setUniform( std::string const & name, glm::vec2 const & v)
 {
-  ::glUniform2f(getUniformLocation(name),v.x,v.y);
+  ::glProgramUniform2f(m_program, getUniformLocation(name),v.x,v.y);
 }
 
 void GLFWPP_ns::GLSLProgram::setUniform( std::string const & name, glm::vec3 const & v)
@@ -243,42 +243,42 @@ void GLFWPP_ns::GLSLProgram::setUniform( std::string const & name, glm::vec3 con
 
 void GLFWPP_ns::GLSLProgram::setUniform( std::string const & name, glm::vec4 const & v)
 {
-  ::glUniform4f(getUniformLocation(name),v.x,v.y,v.z,v.w);
+  ::glProgramUniform4f(m_program, getUniformLocation(name),v.x,v.y,v.z,v.w);
 }
 
 void GLFWPP_ns::GLSLProgram::setUniform( std::string const & name, glm::mat4 const & m)
 {
-  ::glUniformMatrix4fv(getUniformLocation(name), 1, GL_FALSE, &m[0][0]);
+  ::glProgramUniformMatrix4fv(m_program, getUniformLocation(name), 1, GL_FALSE, &m[0][0]);
 }
 
 void GLFWPP_ns::GLSLProgram::setUniform(std::string const & name, std::vector<glm::mat4> const & m)
 {
-  ::glUniformMatrix4fv(getUniformLocation(name), static_cast<GLsizei>(m.size()), GL_FALSE, reinterpret_cast<const float*>(m.data()));
+  ::glProgramUniformMatrix4fv(m_program, getUniformLocation(name), static_cast<GLsizei>(m.size()), GL_FALSE, reinterpret_cast<const float*>(m.data()));
 }
 
 void GLFWPP_ns::GLSLProgram::setUniform( std::string const & name, glm::mat3 const & m)
 {
-  ::glUniformMatrix3fv(getUniformLocation(name), 1, GL_FALSE, &m[0][0]);
+  ::glProgramUniformMatrix3fv(m_program, getUniformLocation(name), 1, GL_FALSE, &m[0][0]);
 }
 
 void GLFWPP_ns::GLSLProgram::setUniform( std::string const & name, float val )
 {
-  ::glUniform1f(getUniformLocation(name), val);
+  ::glProgramUniform1f(m_program, getUniformLocation(name), val);
 }
 
 void GLFWPP_ns::GLSLProgram::setUniform( std::string const & name, int val )
 {
-  ::glUniform1i(getUniformLocation(name), val);
+  ::glProgramUniform1i(m_program, getUniformLocation(name), val);
 }
 
 void GLFWPP_ns::GLSLProgram::setUniform( std::string const & name, bool val )
 {
-  ::glUniform1i(getUniformLocation(name), val);
+  ::glProgramUniform1i(m_program, getUniformLocation(name), val);
 }
 
 void GLFWPP_ns::GLSLProgram::setUniform( std::string const & name, ::GLuint val )
 {
-  ::glUniform1ui(getUniformLocation(name), val);
+  ::glProgramUniform1ui(m_program, getUniformLocation(name), val);
 }
 ////////////////////////////////////////////////////////////////////////////////
 
