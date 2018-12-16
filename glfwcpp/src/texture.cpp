@@ -264,39 +264,42 @@ namespace
       );
 
 
-      auto loadFileData
+      auto loadFileData // lambda
       { [&tex, &hdr, height=hdr.pixelheight, width=hdr.pixelwidth, ptr=dataPtr](uint32_t miplevels) mutable
         {
-          auto calculate_stride{ [&hdr](std::size_t width, std::size_t pad)
-          {
-            std::size_t channels{};
-            switch(hdr.glbaseinternalformat)
+          // another lambda
+          auto calculate_stride
+          { [&hdr](std::size_t width, std::size_t pad)
             {
-            case GL_RED:    channels = 1;
-              break;
-            case GL_RG:     channels = 2;
-              break;
-            case GL_BGR:
-              [[fallthrough]];
-            case GL_RGB:    channels = 3;
-              break;
-            case GL_BGRA:
-              [[fallthrough]];
-            case GL_RGBA:   channels = 4;
-              break;
+              std::size_t channels{};
+              switch(hdr.glbaseinternalformat)
+              {
+              case GL_RED:    channels = 1;
+                break;
+              case GL_RG:     channels = 2;
+                break;
+              case GL_BGR:
+                [[fallthrough]];
+              case GL_RGB:    channels = 3;
+                break;
+              case GL_BGRA:
+                [[fallthrough]];
+              case GL_RGBA:   channels = 4;
+                break;
+              }
+
+              std::size_t stride{ hdr.gltypesize * channels * width };
+
+              --pad;
+              stride = (stride + pad) & ~pad;
+
+              return stride;
             }
-
-            std::size_t stride{ hdr.gltypesize * channels * width };
-
-            stride = (stride + (pad - 1)) & ~(pad - 1);
-
-            return stride;
-          }
-        };
+          }; // end of lambda declaration
 
           ::glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-          for(unsigned int i = 0; i < miplevels; i++)
+          for(decltype(miplevels) i{}; i < miplevels; ++i)
           {
             tex.loadData(
               i
@@ -309,13 +312,12 @@ namespace
             ptr += height * calculate_stride(width, 1);
             height >>= 1;
             width >>= 1;
-            if(!height)
-              height = 1;
-            if(!width)
-              width = 1;
+            if(!height) height = 1;
+            if(!width)  width = 1;
           }
         }
       };
+      // end of lambda declaration
 
       loadFileData(hdr.miplevels);
     };   

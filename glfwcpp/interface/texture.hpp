@@ -86,6 +86,10 @@ namespace GLFWPP_ns
       {
         ::glTextureParameteri(m_name, v.pName, v.param);
       }
+      else
+      {
+        static_assert(false, "Invalid texture parameter type used");
+      }
     }
 
   protected:
