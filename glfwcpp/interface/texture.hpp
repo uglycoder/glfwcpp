@@ -67,6 +67,11 @@ namespace GLFWPP_ns
 
   OGL_TEXTURE_TARGETS GetTargetOfTexture(::GLuint name) noexcept;
 
+  void ResetTextureUnit(::GLuint unit) noexcept;
+
+  // ##########################################################################
+
+  /// class TextureBase
   class TextureBase
   {
   public:  
@@ -80,7 +85,8 @@ namespace GLFWPP_ns
     void label(std::string label) noexcept;
 
     void bindToTextureUnit(::GLuint unit) const noexcept;
-    static void ResetTextureUnit(::GLuint unit) noexcept;
+
+    void generateTextureMipmap() const noexcept;
 
     template<typename T>
     void setParameter(T const & v) const noexcept

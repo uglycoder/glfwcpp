@@ -7,6 +7,7 @@
 #include "precompiled-header.hpp"
 #include "../interface/texture.hpp"
 #include "../interface/utils.hpp"
+#include "../interface/oglproperties.hpp"
 
 
 GLFWPP_ns::OGL_TEXTURE_TARGETS GLFWPP_ns::GetTargetOfTexture(::GLuint name) noexcept
@@ -17,6 +18,12 @@ GLFWPP_ns::OGL_TEXTURE_TARGETS GLFWPP_ns::GetTargetOfTexture(::GLuint name) noex
   ::glGetTextureParameterIuiv(name, GL_TEXTURE_TARGET, &target);
 
   return static_cast<OGL_TEXTURE_TARGETS>(target);
+}
+
+void ResetTextureUnit(::GLuint unit) noexcept
+{
+  assert(unit <= GLFWPP_ns::GetSVLimit(GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS).value);
+  ::glBindTextureUnit(unit, 0);
 }
 
 GLFWPP_ns::TextureBase::TextureBase(
@@ -30,7 +37,7 @@ GLFWPP_ns::TextureBase::TextureBase(
 }
 GLFWPP_ns::TextureBase::~TextureBase()
 {
-  assert(m_name == 0 || ::glIsTexture(m_name));
+  assert(::glIsTexture(m_name));
 
   ::glDeleteTextures(1, &m_name);
 }
@@ -71,16 +78,17 @@ void GLFWPP_ns::TextureBase::label(std::string label) noexcept
 
 void GLFWPP_ns::TextureBase::TextureBase::bindToTextureUnit(::GLuint unit) const noexcept
 {
-  assert(!m_name && ::glIsTexture(m_name) == GL_TRUE);
-  assert(uint <= GetSVLimit(GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS).value);
+  assert(::glIsTexture(m_name) == GL_TRUE);
+  assert(unit <= GetSVLimit(GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS).value);
 
   ::glBindTextureUnit(unit, m_name);
 }
 
-void GLFWPP_ns::TextureBase::TextureBase::ResetTextureUnit(::GLuint unit) noexcept
+void GLFWPP_ns::TextureBase::generateTextureMipmap() const noexcept
 {
-  assert(uint <= GetSVLimit(GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS).value);
-  ::glBindTextureUnit(unit, 0);
+  assert(::glIsTexture(m_name) == GL_TRUE);
+
+  ::glGenerateTextureMipmap(m_name);
 }
 
 namespace
