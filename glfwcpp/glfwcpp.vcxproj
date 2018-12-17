@@ -32,6 +32,7 @@
     <ClCompile Include="src\hints.cpp" />
     <ClCompile Include="src\oglproperties.cpp" />
     <ClCompile Include="src\texture.cpp" />
+    <ClCompile Include="src\texturesampler.cpp" />
     <ClCompile Include="src\utils.cpp" />
     <ClCompile Include="src\vertexarrayobject.cpp" />
     <ClCompile Include="src\vertexbuffer.cpp" />
@@ -61,6 +62,7 @@
     <ClInclude Include="interface\hints.hpp" />
     <ClInclude Include="interface\oglproperties.hpp" />
     <ClInclude Include="interface\texture.hpp" />
+    <ClInclude Include="interface\texturesampler.hpp" />
     <ClInclude Include="interface\utils.hpp" />
     <ClInclude Include="interface\vertexarrayobject.hpp" />
     <ClInclude Include="interface\vertexbuffer.hpp" />
