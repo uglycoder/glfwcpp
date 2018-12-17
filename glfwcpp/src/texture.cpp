@@ -69,6 +69,20 @@ void GLFWPP_ns::TextureBase::label(std::string label) noexcept
   LabelObject(OGL_LABEL_NAMESPACE::TEXTURE, m_name, m_label);
 }
 
+void GLFWPP_ns::TextureBase::TextureBase::bindToTextureUnit(::GLuint unit) const noexcept
+{
+  assert(!m_name && ::glIsTexture(m_name) == GL_TRUE);
+  assert(uint <= GetSVLimit(GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS).value);
+
+  ::glBindTextureUnit(unit, m_name);
+}
+
+void GLFWPP_ns::TextureBase::TextureBase::ResetTextureUnit(::GLuint unit) noexcept
+{
+  assert(uint <= GetSVLimit(GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS).value);
+  ::glBindTextureUnit(unit, 0);
+}
+
 namespace
 {
   constexpr uint8_t KTXHDRIDSIZE{12};

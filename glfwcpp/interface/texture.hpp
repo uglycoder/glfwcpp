@@ -79,6 +79,9 @@ namespace GLFWPP_ns
 
     void label(std::string label) noexcept;
 
+    void bindToTextureUnit(::GLuint unit) const noexcept;
+    static void ResetTextureUnit(::GLuint unit) noexcept;
+
     template<typename T>
     void setParameter(T const & v) const noexcept
     {
