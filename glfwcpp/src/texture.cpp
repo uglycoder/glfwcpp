@@ -20,7 +20,7 @@ GLFWPP_ns::OGL_TEXTURE_TARGETS GLFWPP_ns::GetTargetOfTexture(::GLuint name) noex
   return static_cast<OGL_TEXTURE_TARGETS>(target);
 }
 
-void ResetTextureUnit(::GLuint unit) noexcept
+void GLFWPP_ns::ResetTextureUnit(::GLuint unit) noexcept
 {
   assert(unit <= GLFWPP_ns::GetSVLimit(GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS).value);
   ::glBindTextureUnit(unit, 0);
