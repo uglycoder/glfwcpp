@@ -10,7 +10,7 @@ The [glfwpp] project and some others are, and will be, solely developed by the c
 
 **Note: This repository is under adhoc development and is not currently documented.**
 
-The VS Solution currently comprises 5 projects:
+The VS Solution currently comprises 6 projects:
 ### glfwpp
 This is a static library project and is a partial implementation of a C++ wrapper for the [GLFW 3.2.1 library](http://www.glfw.org/)
 and the [OpenGL 4.5 API](https://www.khronos.org/registry/OpenGL-Refpages/gl4/). It will be further developed as needed.  
